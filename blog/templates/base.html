@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/uikit.min.css') }}"/>
+        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/vue.min.js') }}"></script>
+
+    {% endblock %}
+</head>
+
+<body>
+{% block nav %}
+    <nav class="uk-navbar uk-navbar-attached">
+        <div class="uk-container uk-container-center">
+            <a href="" class="uk-navbar-brand"><i class="uk-icon-home uk-icon-small"></i></a>
+            <ul class="uk-navbar-nav">
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.category') }}">Category</a></li>
+                <li><a href="{{ url_for('main.cms') }}">Cms</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+
+    <div class="uk-grid uk-grid-small">
+        <div class="uk-width-7-10 uk-container-center">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+
+{% block scripts %}
+
+{% endblock %}
+
+</html>

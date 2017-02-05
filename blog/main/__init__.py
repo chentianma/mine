@@ -5,7 +5,7 @@ from flask import Blueprint
 
 
 main = Blueprint('main', __name__,
-                 template_folder='templates',
-                 static_folder='static')
+                 template_folder='blog/templates',
+                 static_folder='blog/static')
 
 from . import views

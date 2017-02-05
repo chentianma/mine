@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div>
+        {% for blog in blogs %}
+            <h3><a href="{{ url_for('main.single_blog', id=blog.id) }}">{{ blog.title }}</a></h3>
+            <a class="uk-icon-small uk-icon-button uk-icon-edit"></a>
+            <a class="uk-icon-small uk-icon-button uk-icon-trash" href="{{ url_for('api.delete_blog', id=blog.id) }}"></a>
+        {% endfor %}
+    </div>
+{% endblock %}
+

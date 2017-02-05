@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="uk-grid">
+        <div class="uk-width-1-1">
+            {% for blog in blogs %}
+                <h2><a href="{{ url_for('main.single_blog', id=blog.id) }}">{{ blog.title }}</a></h2>
+                <p>{{ blog.text | truncate(100, True)}}</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}
+
