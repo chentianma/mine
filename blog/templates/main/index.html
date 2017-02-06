@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="uk-grid">
-        <div class="uk-width-1-1">
+    <div class="row">
+        <div class="col-md-12">
             {% for blog in blogs %}
                 <h2><a href="{{ url_for('main.single_blog', id=blog.id) }}">{{ blog.title }}</a></h2>
                 <p>{{ blog.text | truncate(100, True)}}</p>

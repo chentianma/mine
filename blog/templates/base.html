@@ -5,34 +5,40 @@
 
         <meta charset="UTF-8">
         <title>Title</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/uikit.min.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
         <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/uikit.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/vue.min.js') }}"></script>
 
     {% endblock %}
 </head>
 
 <body>
-{% block nav %}
-    <nav class="uk-navbar uk-navbar-attached">
-        <div class="uk-container uk-container-center">
-            <a href="" class="uk-navbar-brand"><i class="uk-icon-home uk-icon-small"></i></a>
-            <ul class="uk-navbar-nav">
-                <li><a href="{{ url_for('main.index') }}">Home</a></li>
-                <li><a href="{{ url_for('main.category') }}">Category</a></li>
-                <li><a href="{{ url_for('main.cms') }}">Cms</a></li>
-            </ul>
-        </div>
-    </nav>
-{% endblock %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
 
-    <div class="uk-grid uk-grid-small">
-        <div class="uk-width-7-10 uk-container-center">
+            {% block nav %}
+                <nav>
+                    <ul class="nav nav-tabs navbar-right">
+                        <li role="presentation"><a class="h4" href="{{ url_for('main.index') }}">Home</a></li>
+                        <li role="presentation"><a class="h4" href="{{ url_for('main.category') }}">Category</a>
+                        </li>
+                        <li role="presentation"><a class="h4" href="{{ url_for('main.cms') }}">Cms</a></li>
+                    </ul>
+                </nav>
+{#                <div class="row">#}
+                    {#                    <div class="col-md-4">#}
+                    {#                        <a class="h3" href="">Ivory</a>#}
+                    {#                    </div>#}
+{#                </div>#}
+            {% endblock %}
+
             {% block content %}
             {% endblock %}
         </div>
     </div>
+</div>
 
 </body>
 
