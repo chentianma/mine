@@ -1,16 +1,48 @@
 {% extends 'base.html' %}
 
 {% block head %}
-{{ super() }}
+    {{ super() }}
 {% endblock %}
 
 {% block content %}
-    <div>
-        {% for blog in blogs %}
-            <h3><a href="{{ url_for('main.single_blog', id=blog.id) }}">{{ blog.title }}</a></h3>
-            <a><i class="glyphicon glyphicon-edit"></i></a>
-            <a href="{{ url_for('api.delete_blog', id=blog.id) }}"><i class="glyphicon glyphicon-trash"></i></a>
-        {% endfor %}
+    <div id="art">
+        <ul>
+            <li v-repeat="blog:blogs">
+                <h3><a v-attr="href:'/blog/'+blog.id" v-text="blog.title"></a></h3>
+                <a><i class="glyphicon glyphicon-edit"></i></a>
+                <a href="#" v-on="click: delete_blog(blog)"><i
+                        class="glyphicon glyphicon-trash"></i></a>
+            </li>
+        </ul>
     </div>
 {% endblock %}
 
+{% block scripts %}
+    <script>
+        function initVM(data) {
+            var vm = new Vue({
+                el: '#art',
+                data: {
+                    blogs: data.blogs
+                },
+                methods: {
+                    delete_blog: function (blog) {
+                        if (confirm('确认要删除“' + blog.title + '”？删除后不可恢复！')) {
+                            $.post('/api/blog/' + blog.id + '/delete');
+                        };
+                    }
+                }
+            });
+        }
+
+        function getJSON() {
+            $.get('/api/blogs',
+                    function (data, status) {
+                        var b = JSON.stringify(data.blogs);
+                        {#                    alert(b);#}
+                        initVM(data);
+                    });
+        }
+        getJSON()
+    </script>
+{% endblock %}

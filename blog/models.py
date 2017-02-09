@@ -47,7 +47,8 @@ class Article(db.Model):
 
     def to_json(self):
         blogs_json = {
-            'url': url_for('api.get_blog', id=self.id, _external=True),
+            'id':self.id,
+            'url': url_for('main.single_blog', id=self.id, _external=True),
             'title': self.title,
             'text': self.text,
             'time': self.pub_date,

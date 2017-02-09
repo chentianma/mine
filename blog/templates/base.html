@@ -16,26 +16,49 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-
+        <div class="col-md-10 col-md-offset-1">
             {% block nav %}
-                <nav>
-                    <ul class="nav nav-tabs navbar-right">
-                        <li role="presentation"><a class="h4" href="{{ url_for('main.index') }}">Home</a></li>
-                        <li role="presentation"><a class="h4" href="{{ url_for('main.category') }}">Category</a>
-                        </li>
-                        <li role="presentation"><a class="h4" href="{{ url_for('main.cms') }}">Cms</a></li>
-                    </ul>
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#example-navbar-collapse">
+                                <span class="sr-only">切换导航</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="{{ url_for('main.index') }}">IVORY</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="{{ url_for('main.index') }}">Index</a></li>
+                                <li><a href="{{ url_for('main.cms') }}">Cms</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        Category <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">jmeter</a></li>
+                                        <li><a href="#">EJB</a></li>
+                                        <li><a href="#">Jasper Report</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">分离的链接</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">另一个分离的链接</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </nav>
-{#                <div class="row">#}
-                    {#                    <div class="col-md-4">#}
-                    {#                        <a class="h3" href="">Ivory</a>#}
-                    {#                    </div>#}
-{#                </div>#}
             {% endblock %}
-
-            {% block content %}
-            {% endblock %}
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
