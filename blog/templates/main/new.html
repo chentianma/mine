@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        #markedpage {
+            width: 100%;
+            height: 600px;
+            overflow: auto;
+        }
+
+        #inputarea {
+            width: 100%;
+            height: 500px;
+        }
+
+        code {
+            color: #f66;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='js/marked.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/underscore.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    {#    <div>#}
+    {#    {% if blog %}#}
+    {#        <h1>{{ blog.title }}</h1>#}
+    {#        <p>{{ blog.text }}</p>#}
+    {#    {% endif %}#}
+    {#    </div>#}
+
+    <div id="editor" class="row well">
+        <div class="col-md-6">
+            <form>
+                <div class="form-group">
+                    {#                    <label for="textinput"></label>#}
+                    <input v-model='blog.title' id="textinput" type="text" class="form-control" placeholder="标题">
+                </div>
+                <div class="form-group">
+                    <textarea id="inputarea" class="form-control" v-model="blog.text" placeholder="正文"></textarea>
+                </div>
+                <div class="form-group">
+                    <select class="form-control">
+                        <option>Python</option>
+                        <option>JavaScript</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <button type="button" class="btn btn-primary btn-block" @click="submit_edit">提交</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-6">
+            {#            <div class="embed-responsive embed-responsive-4by3">#}
+            {#                <iframe class="embed-responsive-item" src="" v-html="compiledMarkdown"></iframe>#}
+            {#            </div>#}
+            <div id="markedpage" class="panel panel-default">
+                <div class="panel-body" v-html="compiledMarkdown"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        new Vue({
+            el: '#editor',
+            data: {
+                blog: {
+                    'id': null,
+                    'url': null,
+                    'title': null,
+                    'text': '',
+                    'time': null,
+                    'user': null,
+                    'category': null
+                },
+                markhtml: ''
+            },
+            computed: {
+                compiledMarkdown: function () {
+                    this.markhtml = marked(this.blog.text, {sanitize: true});
+                    return this.markhtml
+                }
+            },
+            methods: {
+                submit_edit: function () {
+                    $.post('/api/blog/edit', this.blog, function (data, status) {
+                        var blog_id = data.id;
+                        $(location).attr('href', '/blog/' + blog_id);
+                    });
+                }
+            }
+        })
+    </script>
+{% endblock %}

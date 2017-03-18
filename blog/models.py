@@ -46,14 +46,18 @@ class Article(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
 
     def to_json(self):
+        c = Category.query.get_or_404(self.category_id).name
+        u = User.query.get_or_404(self.author_id).name
         blogs_json = {
-            'id':self.id,
-            'url': url_for('main.single_blog', id=self.id, _external=True),
+            'id': self.id,
+            'url': url_for('main.single_blog',
+                           id=self.id,
+                           _external=True),
             'title': self.title,
             'text': self.text,
             'time': self.pub_date,
-            'user': self.author_id,
-            'category': url_for('api.get_category', id=self.category_id, _external=True)
+            'user': u,
+            'category': c
         }
         return blogs_json
 
@@ -67,13 +71,18 @@ class Category(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
-    articles = db.relationship('Article', backref='category', lazy='dynamic')
+    articles = db.relationship('Article', backref='category',
+                               lazy='dynamic')
 
     def to_json(self):
         cate_json = {
-            'url': url_for('api.get_category', id=self.id, _external=True),
+            'url': url_for('api.get_category',
+                           id=self.id,
+                           _external=True),
             'name': self.name,
-            'articles': url_for('api.get_category_blogs', id=self.id, _external=True)
+            'articles': url_for('api.get_category_blogs',
+                                id=self.id,
+                                _external=True)
         }
         return cate_json
 

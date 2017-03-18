@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     {% block head %}
 
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Title</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
         <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/vue.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
+        <style>
+            #content_block {
+                background-color: #fff;
+                padding: 30px 2% 0 2%;
+                box-shadow: -10px 10px 25px black;
+            }
 
+            #nav-content {
+                padding: 0 0 0 0;
+                box-shadow: -10px 10px 25px black;
+
+            }
+        </style>
     {% endblock %}
 </head>
 
 <body>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+    <div id="renavbar" class="row">
+        <div id="nav-content" class="col-md-10 col-md-offset-1">
+            <img src="{{ url_for('static', filename='img/top_image.png') }}" alt="" class="img-responsive">
             {% block nav %}
-                <nav class="navbar navbar-default" role="navigation">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation"
+                     style="box-shadow:-10px 10px 25px black;">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -32,33 +47,35 @@
                         </div>
                         <div class="collapse navbar-collapse" id="example-navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="{{ url_for('main.index') }}">Index</a></li>
-                                <li><a href="{{ url_for('main.cms') }}">Cms</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        Category <b class="caret"></b>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">jmeter</a></li>
-                                        <li><a href="#">EJB</a></li>
-                                        <li><a href="#">Jasper Report</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">分离的链接</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">另一个分离的链接</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{{ url_for('main.index') }}"><strong>Index</strong></a></li>
+                                <li><a href="{{ url_for('main.cms') }}"><strong>Cms</strong></a></li>
+                                <li><a href=""><strong>About</strong></a></li>
+
+                                {#                                <li class="dropdown">#}
+                                {#                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">#}
+                                {#                                        <strong>Category</strong> <b class="caret"></b>#}
+                                {#                                    </a>#}
+                                {#                                    <ul class="dropdown-menu">#}
+                                {#                                        <li><a href="#">jmeter</a></li>#}
+                                {#                                        <li><a href="#">EJB</a></li>#}
+                                {#                                        <li><a href="#">Jasper Report</a></li>#}
+                                {#                                        <li class="divider"></li>#}
+                                {#                                        <li><a href="#">分离的链接</a></li>#}
+                                {#                                        <li class="divider"></li>#}
+                                {#                                        <li><a href="#">另一个分离的链接</a></li>#}
+                                {#                                    </ul>#}
+                                {#                                </li>#}
                             </ul>
                         </div>
                     </div>
                 </nav>
             {% endblock %}
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
+        </div>
+    </div>
+    <div class="row" style="">
+        <div id="content_block" class="col-md-10 col-md-offset-1">
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
 </div>

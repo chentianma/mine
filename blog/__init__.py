@@ -2,8 +2,12 @@
 
 
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from config import *
 from .models import User, Role, Article, Category, db
+
+
+# bootstrap = Bootstrap()
 
 
 def create_app():
