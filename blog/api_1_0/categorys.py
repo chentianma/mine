@@ -3,10 +3,11 @@
 
 from . import api
 from flask import request, jsonify
-from blog import db, User, Role, Article, Category
+from blog import db
+from ..models import User, Role, Article, Category
 
 
-@api.route('/api/categorys', methods=['POST'])
+@api.route('/categorys', methods=['POST'])
 def set_category():
     data = request.get_json()
     new_category = Category(name=data.name)
@@ -15,13 +16,13 @@ def set_category():
     return jsonify(data)
 
 
-@api.route('/api/category/<int:id>', methods=['GET'])
+@api.route('/category/<int:id>', methods=['GET'])
 def get_category(id):
     cate = Category.query.filter_by(id=id).first()
     return jsonify(cate.to_json())
 
 
-@api.route('/api/category/<int:id>/blogs', methods=['GET'])
+@api.route('/category/<int:id>/blogs', methods=['GET'])
 def get_category_blogs(id):
     blogs = Article.query.filter_by(category_id=id).all()
     return jsonify({'blogs': [blog.to_json() for blog in blogs]})

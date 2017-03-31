@@ -1,40 +1,54 @@
 # -*- coding: utf8 -*-
 
 
-from flask import render_template, flash
+from flask import render_template, flash, request, current_app
+from flask_login import login_required
 from . import main
-from blog import db, User, Role, Article, Category
+from blog import db
+from ..models import User, Role, Article, Category
 
 
-@main.route('/blog', methods=['GET'])
+@main.route('/', methods=['GET'])
 def index():
-    blogs = Article.query.all()
-    flash("进这里是首页！！")
-    return render_template('main/index.html', blogs=blogs)
+    # blogs = Article.query.all()
+    page = request.args.get('page', 1, type=int)
+    pagination = Article.query.order_by(Article.pub_date.desc()).paginate(
+        page, per_page=current_app.config['FLASKY_BLOGS_PER_PAGE'],
+        error_out=False)
+    blogs = pagination.items
+    return render_template('main/index.html', blogs=blogs, pagination=pagination)
 
 
-@main.route('/blog/<int:id>', methods=['GET'])
+@main.route('/<int:id>', methods=['GET'])
 def single_blog(id):
     blog = Article.query.filter_by(id=id).first_or_404()
-    return render_template('main/blog.html', blog=blog)
+    return render_template('main/blog.html')
 
 
-@main.route('/blog/category', methods=['GET'])
+@main.route('/category', methods=['GET'])
 def category():
     return render_template('main/category.html')
 
 
-@main.route('/blog/cms', methods=['GET'])
+@main.route('/cms', methods=['GET'])
+@login_required
 def cms():
     blogs = Article.query.all()
     return render_template('main/cms.html', blogs=blogs)
 
 
-@main.route('/blog/new', methods=['GET'])
+@main.route('/new', methods=['GET'])
+@login_required
 def new():
     return render_template('main/new.html')
 
 
-@main.route('/blog/edit/<int:id>', methods=['GET'])
+@main.route('/edit/<int:id>', methods=['GET'])
+@login_required
 def edit(id):
     return render_template('main/edit.html')
+
+
+@main.route('/about', methods=['GET'])
+def about():
+    return render_template('main/about.html')

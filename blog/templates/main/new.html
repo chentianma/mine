@@ -19,7 +19,7 @@
         }
     </style>
     <script src="{{ url_for('static', filename='js/marked.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/underscore.js') }}"></script>
+{#    <script src="{{ url_for('static', filename='js/underscore.js') }}"></script>#}
 {% endblock %}
 
 {% block content %}
@@ -36,6 +36,9 @@
                 <div class="form-group">
                     {#                    <label for="textinput"></label>#}
                     <input v-model='blog.title' id="textinput" type="text" class="form-control" placeholder="标题">
+                </div>
+                <div class="form-group">
+                    <input v-model='blog.description' type="text" class="form-control" placeholder="描述">
                 </div>
                 <div class="form-group">
                     <textarea id="inputarea" class="form-control" v-model="blog.text" placeholder="正文"></textarea>

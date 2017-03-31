@@ -3,22 +3,31 @@
 
 from flask import Flask
 from flask_bootstrap import Bootstrap
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
 from config import *
-from .models import User, Role, Article, Category, db
 
 
-# bootstrap = Bootstrap()
+db = SQLAlchemy()
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
+bootstrap = Bootstrap()
 
 
 def create_app():
     from .main import main as blog_blueprint
     from .api_1_0 import api as api_blueprint
+    from .auth import auth as auth_blueprint
     app = Flask(__name__)
     app.config.from_object(TestConfig())
 
-    app.register_blueprint(blog_blueprint)
-    app.register_blueprint(api_blueprint)
+    app.register_blueprint(blog_blueprint, url_prefix='/blog')
+    app.register_blueprint(api_blueprint, url_prefix='/api')
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
+    login_manager.init_app(app)
+    bootstrap.init_app(app)
     db.app = app
     db.init_app(app)
     db.create_all()

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div id="login_form" class="center_mini col-md-6">
+            {% if get_flashed_messages() %}
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ get_flashed_messages()[0] }}
+                </div>
+            {% endif %}
+            <div>
+                {{ wtf.quick_form(login_form) }}
+            </div>
+            {#                <hr>#}
+            {#                <form action="/auth/login">#}
+            {#                    <div class="form-group">#}
+            {#                        {{ login_form.user_name(class='form-control', placeholder='UserName', type='text') }}#}
+            {#                    </div>#}
+            {#                    <div class="form-group">#}
+            {#                        {{ login_form.password(class='form-control', placeholder='Password', type='password') }}#}
+            {#                    </div>#}
+            {#                    <div class="form-group">#}
+            {#                        <label>#}
+            {#                        {{ login_form.user_name(class='form-control', type='checkbox', value='y') }}keep me logged in#}
+            {#                        </label>#}
+            {#                    </div>#}
+            {#                    {{ login_form.submit(type="submit", class="btn btn-primary center-block") }}#}
+            {#                </form>#}
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

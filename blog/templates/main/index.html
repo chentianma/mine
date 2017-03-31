@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import "_pagination_macros.html" as macros %}
 
 {% block head %}
     {{ super() }}
@@ -20,64 +21,61 @@
             box-shadow: -5px 5px 25px black;
         }
 
-        #article h1 {
+        #article p {
             margin-top: 0;
+            margin-bottom: 0;
         }
+
+        #article hr {
+            margin-top: 5px;
+            margin-bottom: 8px;
+        }
+
     </style>
 {% endblock %}
 
 {% block content %}
     <div class="row">
-        <div class="col-md-8 col-md-offset-0">
+        <div class="col-md-7 col-md-offset-0">
             <div class="row">
                 <div class="col-md-12">
-                    {#            <div class="alert alert-success">#}
-                    {#                <button type="button" class="close" data-dismiss="alert">&times;</button>#}
-                    {#                {{ get_flashed_messages()[0] }}#}
-                    {#            </div>#}
                     {% if blogs %}
                         {% for blog in blogs %}
                             <div id="article" class="thumbnail">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <img id="article_img-left" class="img-responsive img-rounded"
-                                             src="{{ url_for('static', filename='img/test_img.png') }}"
-                                             style="width: 100%; height: auto">
+                                             src="{{ url_for('static', filename='article_img/%s' % blog.img) }}">
                                     </div>
                                     <div class="col-md-9">
                                         <div class="caption">
-                                            <a href="{{ url_for('main.single_blog', id=blog.id) }}">
-                                                <h1 class="page-header text-center">
-                                                    <small>{{ blog.title }}</small>
-                                                </h1>
-                                            </a>
-                                            <p>{{ blog.text | truncate(50, True) }}</p>
+                                            <p class="text-center lead text-success">{{ blog.title }}</p>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <p class="text-muted lead">
+                                                        <small>{{ blog.description | truncate(20) }}</small>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <a href="{{ url_for('main.single_blog', id=blog.id) }}">
+                                                        <button type="button" class="btn btn-link pull-right">继续阅读>>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div id="article" class="thumbnail">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <img id="article_img-right" class="img-responsive img-rounded"
-                                             src="{{ url_for('static', filename='img/test_img2.png') }}"
-                                             style="width: 100%; height: auto">
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="caption">
-                                            <a href="{{ url_for('main.single_blog', id=blog.id) }}">
-                                                <h1 class="page-header text-center">
-                                                    <small>{{ blog.title }}</small>
-                                                </h1>
-                                            </a>
-                                            <p>{{ blog.text | truncate(50, True) }}</p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
                     {% endif %}
+                </div>
+                <div class="col-md-6 center_mini">
+                    <div class="pagination">
+                        {{ macros.pagination_widget(pagination, 'main.index') }}
+                    </div>
                 </div>
             </div>
         </div>

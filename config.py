@@ -12,6 +12,7 @@ class DefaultConfig(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'YOU-WILL-NEVER-GET'
+    FLASKY_BLOGS_PER_PAGE = 8
 
 
 class TestConfig(DefaultConfig):
@@ -22,3 +23,4 @@ class TestConfig(DefaultConfig):
     TESTING = True
     CSRF_ENABLED = True
     SECRET_KEY = 'YOU-WILL-NEVER-GET'
+    FLASKY_BLOGS_PER_PAGE = 8
