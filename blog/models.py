@@ -52,7 +52,7 @@ class Article(db.Model):
     __tablename__ = 'Article'
 
     id = db.Column(db.Integer, primary_key=True)
-    img = db.Column(db.String(100))
+    img = db.Column(db.String(100), default='1.png')
     title = db.Column(db.String(100))
     description = db.Column(db.String(90))
     text = db.Column(db.Text)
@@ -62,8 +62,13 @@ class Article(db.Model):
 
     def to_json(self):
         c = Category.query.get_or_404(self.category_id).name
+        # oc = Category.query.filter(Category.name != c).all()
+        # other_category = [c]
+        # for i in oc:
+        #     other_category.append(i.name)
+        # print(other_category)
         u = User.query.get_or_404(self.author_id).name
-        blogs_json = {
+        blog_json = {
             'id': self.id,
             'url': url_for('main.single_blog',
                            id=self.id,
@@ -76,7 +81,7 @@ class Article(db.Model):
             'category': c,
             'img_url': url_for('static', filename='article_img/%s' % self.img)
         }
-        return blogs_json
+        return blog_json
 
     def __repr__(self):
         return '<Article %r>' % self.title

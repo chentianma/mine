@@ -2,18 +2,24 @@
 
 {% block head %}
     {{ super() }}
+    <style>
+        #content_height {
+            min-height: 500px;
+        }
+    </style>
 {% endblock %}
 
-{#{% block nav_li %}#}
-{#    <li><a href="{{ url_for('main.index') }}"><strong>目录</strong></a></li>#}
-{#    <li><a href="{{ url_for('main.cms') }}"><strong>管理</strong></a></li>#}
-{#    <li class="active"><a href="{{ url_for('main.about') }}"><strong>关于</strong></a></li>#}
-{#{% endblock %}#}
 
 {% block content %}
-    <div>
-        <h3>This is 'About' page!</h3>
+    <div class="row" id="content_height">
+        <div class="col-md-8">
+            <div class="col-md-6">
+                <h1>About</h1>
+            </div>
+        </div>
     </div>
 {% endblock %}
+
 {% block scripts %}
+{#    {{ super }}#}
 {% endblock %}

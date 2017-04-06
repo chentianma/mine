@@ -17,7 +17,7 @@ def get_blog(id):
 
 @api.route('/blogs', methods=['GET'])
 def get_blogs():
-    blogs = Article.query.all()
+    blogs = Article.query.order_by(Article.pub_date.desc()).all()
     return jsonify({'blogs': [blog.to_json() for blog in blogs]})
 
 
@@ -43,11 +43,13 @@ def edit_blog(id):
     title = request.form.get('title')
     text = request.form.get('text')
     des = request.form.get('description')
+    # new_category = request.form.get('category')
 
     new_article = Article.query.filter_by(id=id).first()
     new_article.title = title
     new_article.text = text
     new_article.description =des
+    # new_article.category_id = new_category
     new_id = id
 
     db.session.add(new_article)
@@ -55,15 +57,16 @@ def edit_blog(id):
     return jsonify({'id': new_id})
 
 
-@api.route('/api/blog/edit', methods=['POST'])
+@api.route('/blog/edit', methods=['POST'])
 @login_required
 def create_blog():
     title = request.form.get('title')
     text = request.form.get('text')
     des = request.form.get('description')
+    category = request.form.get('category')
 
     user = User.query.filter_by(name='Admin1').first()
-    cate = Category.query.filter_by(name='Python').first()
+    cate = Category.query.filter_by(name=category).first()
     new_article = Article(title=title, description=des, text=text, user=user, category=cate)
     new_id = Article.query.filter_by(title=title).first_or_404().id
 
