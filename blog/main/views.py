@@ -10,7 +10,6 @@ from ..models import User, Role, Article, Category
 
 @main.route('/', methods=['GET'])
 def index():
-    # blogs = Article.query.all()
     page = request.args.get('page', 1, type=int)
     pagination = Article.query.order_by(Article.pub_date.desc()).paginate(
         page, per_page=current_app.config['FLASKY_BLOGS_PER_PAGE'],

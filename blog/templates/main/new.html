@@ -14,11 +14,8 @@
             height: 500px;
         }
 
-        pre code {
-            color: #0642ff;
-        }
     </style>
-    <script src="{{ url_for('static', filename='js/marked.js') }}"></script>
+{#    <script src="{{ url_for('static', filename='js/marked.js') }}"></script>#}
 {#    <script src="{{ url_for('static', filename='js/underscore.js') }}"></script>#}
 {% endblock %}
 
@@ -82,7 +79,7 @@
             methods: {
                 submit_edit: function () {
                     this.blog.category = $("#cate option:selected").text();
-                    $.post('/api/blog/edit', this.blog, function (data, status) {
+                    $.post('/api/blog/create', this.blog, function (data, status) {
                         var blog_id = data.id;
                         $(location).attr('href', '/blog/' + blog_id);
                     });

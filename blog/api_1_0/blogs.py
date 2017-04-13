@@ -57,7 +57,7 @@ def edit_blog(id):
     return jsonify({'id': new_id})
 
 
-@api.route('/blog/edit', methods=['POST'])
+@api.route('/blog/create', methods=['POST'])
 @login_required
 def create_blog():
     title = request.form.get('title')

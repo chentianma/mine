@@ -2,20 +2,12 @@
 
 {% block head %}
     {{ super() }}
-    <script src="{{ url_for('static', filename='js/marked.js') }}"></script>
-    {#    <script src="{{ url_for('static', filename='js/underscore.js') }}"></script>#}
-    <style>
-    pre code {
-            color: #0642ff;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div id="article">
-                {#                <h1 class="text-center lead text-success"><strong v-text="blog.title"></strong></h1>#}
                 <div class="row">
                     <div class="col-md-10">
                         <h1 class="text-center lead text-success" v-text="blog.title"></h1>
@@ -55,7 +47,9 @@
                     {#                        </div>#}
                     {#                    {% endif %}#}
                 </div>
-                <div v-html="compiledMarkdown"></div>
+                <div v-if="blog.text">
+                    <div v-html="compiledMarkdown"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -70,8 +64,9 @@
             },
             computed: {
                 compiledMarkdown: function () {
-                    this.markhtml = marked(this.blog.text, {sanitize: true});
-                    return this.markhtml
+                    this.markhtml = marked(this.blog.text);
+                    return this.markhtml;
+
                 }
             }
         });
@@ -79,13 +74,12 @@
         function initPage() {
             var path = window.location.pathname;
             $.get('/api' + path, function (data, status) {
-                {#                alert(JSON.stringify(data.blog));#}
                 art_vm.blog = data.blog;
             });
         }
         ;
 
         initPage();
-
     </script>
+
 {% endblock %}

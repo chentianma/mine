@@ -34,7 +34,7 @@
                         <template v-for="(blog, index) in blogs">
                             <tbody>
                             <th scope="row" v-text="index+1"></th>
-                            <td><a :href="'/blog/'+blog.id" v-text='blog.title'></a></td>
+                            <td><a :href="'/blog/'+blog.id" v-text='blog.title' class="lead" style="font-size: medium"></a></td>
                             <td><a :href="'/blog/edit/'+blog.id"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td><a v-on:click="delete_blog(blog,index)"><i class="glyphicon glyphicon-trash"></i></a>
                             </td>

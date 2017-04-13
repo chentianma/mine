@@ -52,7 +52,7 @@ class Article(db.Model):
     __tablename__ = 'Article'
 
     id = db.Column(db.Integer, primary_key=True)
-    img = db.Column(db.String(100), default='1.png')
+    img = db.Column(db.String(100), default='44.jpg')
     title = db.Column(db.String(100))
     description = db.Column(db.String(90))
     text = db.Column(db.Text)

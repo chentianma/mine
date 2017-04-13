@@ -4,11 +4,13 @@
 from flask import Flask
 from flask_script import Shell, Manager
 from flask_migrate import Migrate, MigrateCommand
+from flask_moment import Moment
 from blog import create_app, db
 from blog.models import User, Role, Article, Category
 
 
 app = create_app()
+moment = Moment(app)
 manager = Manager(app)
 migreate = Migrate(app, db)
 
