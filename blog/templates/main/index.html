@@ -5,104 +5,130 @@
     {{ super() }}
     <style>
 
-        #article {
-            box-shadow: -5px 5px 25px black;
-            padding: 0;
-            margin-bottom: 7%;
-            height: 100px;
-        }
 
-        #article_img-left {
-        {#            margin-right: -2%;#} padding-right: 0;
-            max-width: 130px;
-        }
+        {#        #article {#}
+        {#            box-shadow: -5px 5px 25px black;#}
+        {#            padding: 0;#}
+        {#            margin-bottom: 7%;#}
+        {#            height: 100px;#}
+        {#        }#}
+        {##}
+        {#        #article_img-left {#}
+        {#            margin-right: -2%;#}
+        padding-right:
 
-        #article_img-left img {
-            margin-top: 0;
-            box-shadow: -5px 5px 25px black;
-            max-height: 100px;
-        }
-
-        #article p {
-            margin-top: 5px;
+        0
+        ;
+        {#            max-width: 130px;#}
+        {#        }#}
+        {##}
+        {#        #article_img-left img {#}
+        {#            margin-top: 0;#}
+        {#            box-shadow: -5px 5px 25px black;#}
+        {#            max-height: 100px;#}
+        {#        }#}
+        {##}
+        {#        #article p {#}
+        {#            margin-top: 5px;#}
         {#            margin-bottom: 0;#}
-        }
-
-        #article hr {
-        {#            margin-top: 5px;#} margin-bottom: 3px;
-        }
-
-        #blog_div {
-            max-height: 100px;
-        }
+        {#        }#}
+        {##}
+        {#        #article hr {#}
+        {#            margin-top: 5px;#}
+        {#        }#}
+        {##}
+        {#        #blog_div {#}
+        {#            max-height: 100px;#}
+        {#        }#}
 
     </style>
 {% endblock %}
 
+
 {% block content %}
-    <div class="row">
-        <div class="col-md-7">
+    <div class="uk-grid uk-grid-divider">
+        <div class="uk-width-medium-2-3">
+        <div class="uk-grid"></div>
             {% if blogs %}
                 {% for blog in blogs %}
-                    <div id="blog_div" class="row">
-                        <div class="col-md-3 col-xs-4" id="article_img-left">
-                            <img class="img-responsive img-rounded"
-                                 src="{{ url_for('static', filename='article_img/%s' % blog.img) }}">
-                        </div>
-                        <div class="col-md-9 col-xs-12">
-                            <div id="article" class="row thumbnail">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="caption">
-                                            <p class="text-center h4 text-warning">{{ blog.title | truncate(30) }}</p>
-                                            <hr>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <p class="text-muted h4 text-center">
-                                                    <small>
-                                                        发布时间：{{ moment(blog.pub_date).fromNow(refresh=true) }}</small>
-                                                </p>
-                                            </div>
-                                            {#                                            <div class="col-md-3">#}
-                                            {#                                                <p class="text-muted h4 text-center">#}
-                                            {#                                                    <small>分类：{{ blog.category_id }}</small>#}
-                                            {#                                                </p>#}
-                                            {#                                            </div>#}
-                                            <div id="continue" class="col-md-3 col-md-offset-3">
-                                                <a href="{{ url_for('main.single_blog', id=blog.id) }}">
-                                                    <button type="button" class="btn btn-link pull-left">
-                                                        继续阅读>>
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <figure class="uk-overlay">
+                        <img src="{{ url_for('static', filename='article_img/%s' % blog.img) }}" width="200px" height="" alt="">
+                        <div class="uk-overlay-panel">{{ blog.title }}</div>
+                        <a class="uk-position-cover" href="{{ url_for('main.single_blog', id=blog.id) }} "></a>
+                    </figure>
                 {% endfor %}
             {% endif %}
-            <div class="row">
-                <div class="col-md-10 col-md-offset-2">
-                    <div class="center_mini">
-                        {{ macros.pagination_widget(pagination, 'main.index') }}
-                    </div>
-                </div>
-            </div>
         </div>
-{#        缺少一条竖状的分割线#}
-        <div class="col-md-4 pull-right">
-{#            <div class="well" >#}
-                <div class="panel panel-default" style="box-shadow: -5px 5px 25px black;">
-                    <div class="panel-heading">Tags</div>
-                    <div class="panel-body">tags</div>
-                </div>
-{#            </div>#}
+        <div class="uk-width-medium-1-3">
+            <h4>zhanwei</h4>
         </div>
     </div>
-    </div>
-
 {% endblock %}
+{#{% block content %}#}
+{#    <div class="uk-width-3-5">#}
+{#        <div class="col-md-7">#}
+{#            {% if blogs %}#}
+{#                {% for blog in blogs %}#}
+{#                    <div id="blog_div" class="row">#}
+{#                        <div class="col-md-3 col-xs-4" id="article_img-left">#}
+{#                            <img class="img-responsive img-rounded"#}
+{#                                 src="{{ url_for('static', filename='article_img/%s' % blog.img) }}">#}
+{#                        </div>#}
+{#                        <div class="col-md-9 col-xs-12">#}
+{#                            <div id="article" class="row thumbnail">#}
+{#                                <div class="col-md-12">#}
+{#                                    <div class="row">#}
+{#                                        <div class="caption">#}
+{#                                            <p class="text-center h4 text-warning">{{ blog.title | truncate(30) }}</p>#}
+{#                                            <hr>#}
+{#                                        </div>#}
+{#                                        <div class="row">#}
+{#                                            <div class="col-md-5">#}
+{#                                                <p class="text-muted h4 text-center">#}
+{#                                                    <small>#}
+{#                                                        发布时间：{{ moment(blog.pub_date).fromNow(refresh=true) }}</small>#}
+{#                                                </p>#}
+{#                                            </div>#}
+{#                                            <div class="col-md-3">#}
+{#                                                <p class="text-muted h4 text-center">#}
+{#                                                    <small>分类：{{ blog.category_id }}</small>#}
+{#                                                </p>#}
+{#                                            </div>#}
+{#                                            <div id="continue" class="col-md-3 col-md-offset-3">#}
+{#                                                <a href="{{ url_for('main.single_blog', id=blog.id) }}">#}
+{#                                                    <button type="button" class="btn btn-link pull-left">#}
+{#                                                        继续阅读>>#}
+{#                                                    </button>#}
+{#                                                </a>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+{#            <div class="row">#}
+{#                <div class="col-md-10 col-md-offset-2">#}
+{#                    <div class="center_mini">#}
+{#                        {{ macros.pagination_widget(pagination, 'main.index') }}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        缺少一条竖状的分割线#}
+{#        <div class="col-md-4 pull-right">#}
+{#            <div class="well" >#}
+{#                <div class="panel panel-default" style="box-shadow: -5px 5px 25px black;">#}
+{#                    <div class="panel-heading">Tags</div>#}
+{#                    <div class="panel-body">tags</div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}
+
 
