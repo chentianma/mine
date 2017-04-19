@@ -47,3 +47,7 @@ def new():
 def edit(id):
     return render_template('main/edit.html')
 
+
+@main.route('/about', methods=['GET'])
+def about():
+    return render_template('main/about.html')

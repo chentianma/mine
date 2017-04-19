@@ -15,10 +15,7 @@
         {##}
         {#        #article_img-left {#}
         {#            margin-right: -2%;#}
-        padding-right:
 
-        0
-        ;
         {#            max-width: 130px;#}
         {#        }#}
         {##}
@@ -46,17 +43,60 @@
 
 
 {% block content %}
-    <div class="uk-grid uk-grid-divider">
+    <div class="uk-grid uk-grid-divider" style="">
         <div class="uk-width-medium-2-3">
-        <div class="uk-grid"></div>
+            {#            <div class="uk-grid uk-grid-medium"></div>#}
             {% if blogs %}
+                {% if blogs[0] %}
+                    <div class="uk-block-default uk-border-rounded l_d_shadow">
+                        <div class="uk-grid uk-grid-small">
+                            <div class="uk-width-1-1">
+                                <figure class="uk-overlay uk-overlay-hover">
+                                    <img class="uk-border-rounded uk-overlay-scale"
+                                         src="{{ url_for('static', filename='img/top_image1.png') }}"
+                                         width=""
+                                         height="" alt="">
+                                    <div class="uk-overlay-panel uk-overlay-slide-bottom">
+                                        <p class="uk-text-large">{{ blogs[0].title }}</p>
+                                        <p class="uk-h4"> {{ blogs[0].description }}</p>
+                                    </div>
+                                    <a class="uk-position-cover"
+                                       href="{{ url_for('main.single_blog', id=blogs[0].id) }} "></a>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                {% endif %}
+
+
                 {% for blog in blogs %}
-                    <figure class="uk-overlay">
-                        <img src="{{ url_for('static', filename='article_img/%s' % blog.img) }}" width="200px" height="" alt="">
-                        <div class="uk-overlay-panel">{{ blog.title }}</div>
-                        <a class="uk-position-cover" href="{{ url_for('main.single_blog', id=blog.id) }} "></a>
-                    </figure>
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-1">
+                            <div class="l_d_shadow uk-border-rounded">
+                                <div class="uk-grid">
+
+                                    <div class="uk-width-medium-2-10 ">
+                                        <a href="{{ url_for('static', filename='article_img/%s' % blog.img) }}"
+                                           data-uk-lightbox title="">
+                                            <img class="uk-border-rounded "
+                                                 src="{{ url_for('static', filename='article_img/%s' % blog.img) }}"
+                                                 width=""
+                                                 height="" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="uk-width-medium-7-10 uk-panel uk-margin-top uk-text-center">
+                                        <a class="uk-panel-title " href="{{ url_for('main.single_blog', id=blog.id) }}">
+                                            <h3 class="uk-text-success">{{ blog.title }}</h3>
+                                        </a>
+                                        <p class="uk-text-muted">{{ blog.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
+
             {% endif %}
         </div>
         <div class="uk-width-medium-1-3">
