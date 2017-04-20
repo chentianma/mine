@@ -11,32 +11,35 @@
 {#{% endblock %}#}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <a href="{{ url_for('main.new') }}">
-                        <button type="button" class="btn btn-primary btn-block">新建文章</button>
-                    </a>
-                </div>
-            </div>
-            <hr>
+    <div class="uk-grid uk-grid-collapse">
+        <div class="uk-width-large-2-3 uk-width-medium-1-1 uk-align-center">
+            <a href="{{ url_for('main.new') }}">
+                <button class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-border-rounded button_shadow">新建文章</button>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="uk-grid uk-grid-collapse">
+        <div class="uk-width-large-1-1">
             <div id="art">
-                <div class="table-responsive">
-                    <table class="table table-hover">
+                <div class="uk-table uk-table-hover uk-border-rounded">
+                    <table>
                         <thead>
                         <th>#</th>
-                        <th>文章</th>
-                        <th>编辑</th>
-                        <th>删除</th>
+                        <th class="uk-width-4-6 uk-text-center">文章</th>
+                        <th class="uk-width-1-6 uk-text-center">编辑</th>
+                        <th class="uk-width-1-6 uk-text-center">删除</th>
                         </thead>
 
                         <template v-for="(blog, index) in blogs">
                             <tbody>
                             <th scope="row" v-text="index+1"></th>
-                            <td><a :href="'/blog/'+blog.id" v-text='blog.title' class="lead" style="font-size: medium"></a></td>
-                            <td><a :href="'/blog/edit/'+blog.id"><i class="glyphicon glyphicon-edit"></i></a></td>
-                            <td><a v-on:click="delete_blog(blog,index)"><i class="glyphicon glyphicon-trash"></i></a>
+                            <td class="uk-width-4-6 uk-text-center"><a :href="'/blog/'+blog.id" v-text='blog.title'
+                                                                       class="uk-text-primary"></a></td>
+                            <td class="uk-width-1-6 uk-text-center"><a :href="'/blog/edit/'+blog.id"><i
+                                    class="uk-icon-hover uk-icon-paint-brush"></i></a></td>
+                            <td class="uk-width-1-6 uk-text-center"><a v-on:click="delete_blog(blog,index)"><i
+                                    class="uk-icon-hover uk-icon-times uk-icon-small"></i></a>
                             </td>
                             </tbody>
                         </template>
@@ -45,6 +48,40 @@
             </div>
         </div>
     </div>
+    {#    <div class="row">#}
+    {#        <div class="col-md-8">#}
+    {#            <div class="row">#}
+    {#                <div class="col-md-6 col-md-offset-3">#}
+    {#                    <a href="{{ url_for('main.new') }}">#}
+    {#                        <button type="button" class="btn btn-primary btn-block">新建文章</button>#}
+    {#                    </a>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <hr>#}
+    {#            <div id="art">#}
+    {#                <div class="table-responsive">#}
+    {#                    <table class="table table-hover">#}
+    {#                        <thead>#}
+    {#                        <th>#</th>#}
+    {#                        <th>文章</th>#}
+    {#                        <th>编辑</th>#}
+    {#                        <th>删除</th>#}
+    {#                        </thead>#}
+    {##}
+    {#                        <template v-for="(blog, index) in blogs">#}
+    {#                            <tbody>#}
+    {#                            <th scope="row" v-text="index+1"></th>#}
+    {#                            <td><a :href="'/blog/'+blog.id" v-text='blog.title' class="lead" style="font-size: medium"></a></td>#}
+    {#                            <td><a :href="'/blog/edit/'+blog.id"><i class="glyphicon glyphicon-edit"></i></a></td>#}
+    {#                            <td><a v-on:click="delete_blog(blog,index)"><i class="glyphicon glyphicon-trash"></i></a>#}
+    {#                            </td>#}
+    {#                            </tbody>#}
+    {#                        </template>#}
+    {#                    </table>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
 {% endblock %}
 
 {% block scripts %}

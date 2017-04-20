@@ -2,68 +2,47 @@
 
 {% block head %}
     {{ super() }}
-    <style>
-        #markedpage {
-            width: 100%;
-            height: 800px;
-            overflow: auto;
-        }
-
-        #inputarea {
-            width: 100%;
-            height: 650px;
-        }
-
-    </style>
-{#    <script src="{{ url_for('static', filename='js/marked.js') }}"></script>#}
-{#    <script src="{{ url_for('static', filename='js/underscore.js') }}"></script>#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/components/htmleditor.css') }}"/>
+    <script src="{{ url_for('static', filename='uikit/js/components/htmleditor.js') }}"></script>
 {% endblock %}
 
-{% block content %}
-    <div id="editor" class="row well">
-        <div class="col-md-6">
-            <form>
-                <div class="form-group">
-                    {#                    <label for="textinput"></label>#}
-                    <input v-model='blog.title' id="textinput" type="text" class="form-control">
+{% block board %}
+    <div class="uk-grid uk-grid-collapse">
+        <form id="editor" class="uk-width-1-1 uk-form">
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <input v-model='blog.title' type="text" class="uk-width-1-1" placeholder="标题">
                 </div>
-                <div class="form-group">
-                    <input v-model='blog.description' type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                    <textarea id="inputarea" class="form-control" v-model="blog.text"></textarea>
-                </div>
-{#                <div class="form-group">#}
-{#                    <select class="form-control">#}
-{#                        <option  v-text="blog.category"></option>#}
-{#                        <option>JavaScript</option>#}
-{#                    </select>#}
-{#                </div>#}
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <button type="button" class="btn btn-primary btn-block" @click="submit_edit">提交</button>
-                    </div>
-                </div>
-            </form>
-{#            <form action="">#}
-{#                <div class="form-group">#}
-{#                    <label for="image">File input</label>#}
-{#                    <input type="file" id="image">#}
-{#                    <p class="help-block">Example block-level help text here.</p>#}
-{#                </div>#}
-{##}
-{#            </form>#}
-        </div>
-        <div class="col-md-6">
-            {#            <div class="embed-responsive embed-responsive-4by3">#}
-            {#                <iframe class="embed-responsive-item" src="" v-html="compiledMarkdown"></iframe>#}
-            {#            </div>#}
-            <div id="markedpage" class="panel panel-default">
-                <div class="panel-body" v-html="compiledMarkdown"></div>
             </div>
-        </div>
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <input v-model='blog.description' type="text" class="uk-width-1-1" placeholder="描述">
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <textarea id="editor_string" cols="" rows="" placeholder="" v-model="blog.text"
+                              data-uk-htmleditor="{ mode:'split', markdown:true}"></textarea>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <select id="cate" class="uk-form-controls">
+                    <option>Python</option>
+                    <option>JavaScript</option>
+                    <option>Life</option>
+                </select>
+            </div>
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button type="button" class="uk-button uk-width-1-1 button_shadow uk-border-rounded"
+                            @click="submit_edit">提交
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 {% endblock %}
+
 {% block scripts %}
     <script>
         var editor_vm = new Vue({
@@ -91,6 +70,7 @@
             },
             methods: {
                 submit_edit: function () {
+                    this.blog.text = $('#editor_string').val();
                     $.post('/api/blog/' + this.blog.id + '/edit', this.blog, function (data, status) {
                         var blog_id = data.id;
                         $(location).attr('href', '/blog/' + blog_id);
@@ -104,10 +84,13 @@
             $.get('/api' + path, function (data, status) {
                 {#                alert(JSON.stringify(data.blog));#}
                 editor_vm.blog = data.blog;
+                $('#editor_string').val(data.blog.text);
+
             });
-        }
-        ;
+        };
 
         initPage();
+
+
     </script>
 {% endblock %}
