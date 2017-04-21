@@ -4,6 +4,9 @@
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/components/htmleditor.css') }}"/>
     <script src="{{ url_for('static', filename='uikit/js/components/htmleditor.js') }}"></script>
+    <script>
+
+    </script>
 {% endblock %}
 
 {% block board %}
@@ -21,15 +24,17 @@
             </div>
             <div class="uk-form-row">
                 <div class="uk-form-controls">
-                    <textarea id="editor_string" cols="" rows="" placeholder="" v-model="blog.text"
-                              data-uk-htmleditor="{ mode:'split', markdown:true}"></textarea>
+                    <textarea id="editor_string" cols="" rows="" placeholder=""></textarea>
+                    {#                    <textarea id="editor_string" cols="" rows="" placeholder=""#}
+                    {#                              data-uk-htmleditor="{markdown:true}"></textarea>#}
                 </div>
             </div>
             <div class="uk-form-row">
                 <select id="cate" class="uk-form-controls">
-                    <option>Python</option>
-                    <option>JavaScript</option>
-                    <option>Life</option>
+                    <option v-text="blog.category"></option>
+                    <template v-for="c in blog.other_category">
+                        <option v-text="c"></option>
+                    </template>
                 </select>
             </div>
             <div class="uk-form-row">
@@ -45,6 +50,7 @@
 
 {% block scripts %}
     <script>
+
         var editor_vm = new Vue({
             el: '#editor',
             data: {
@@ -71,6 +77,7 @@
             methods: {
                 submit_edit: function () {
                     this.blog.text = $('#editor_string').val();
+                    this.blog.category = $("#cate option:selected").text();
                     $.post('/api/blog/' + this.blog.id + '/edit', this.blog, function (data, status) {
                         var blog_id = data.id;
                         $(location).attr('href', '/blog/' + blog_id);
@@ -79,18 +86,20 @@
             }
         });
 
+        {#初始化codemirror编辑器#}
+        var mytextarea = document.getElementById('editor_string');
+        var htmleditor = UIkit.htmleditor(mytextarea, {mode: 'split', markdown: true});
+
         function initPage() {
             var path = window.location.pathname;
             $.get('/api' + path, function (data, status) {
-                {#                alert(JSON.stringify(data.blog));#}
                 editor_vm.blog = data.blog;
-                $('#editor_string').val(data.blog.text);
-
+                htmleditor.editor.setValue(editor_vm.blog.text);
             });
-        };
+        }
+        ;
 
         initPage();
-
 
     </script>
 {% endblock %}

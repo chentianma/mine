@@ -42,14 +42,15 @@ def edit_api(id):
 def edit_blog(id):
     title = request.form.get('title')
     text = request.form.get('text')
-    des = request.form.get('description')
-    # new_category = request.form.get('category')
+    description = request.form.get('description')
+    new_category = request.form.get('category')
+    new_c = Category.query.filter_by(name=new_category).first_or_404()
 
     new_article = Article.query.filter_by(id=id).first()
     new_article.title = title
     new_article.text = text
-    new_article.description =des
-    # new_article.category_id = new_category
+    new_article.description = description
+    new_article.category_id = new_c.id
     new_id = id
 
     db.session.add(new_article)
@@ -67,7 +68,11 @@ def create_blog():
 
     user = User.query.filter_by(name='Admin1').first()
     cate = Category.query.filter_by(name=category).first()
-    new_article = Article(title=title, description=des, text=text, user=user, category=cate)
+    new_article = Article(title=title,
+                          description=des,
+                          text=text,
+                          user=user,
+                          category=cate)
     new_id = Article.query.filter_by(title=title).first_or_404().id
 
     db.session.add(new_article)

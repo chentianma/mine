@@ -11,11 +11,18 @@ from ..models import User, Role, Article, Category
 @main.route('/', methods=['GET'])
 def index():
     page = request.args.get('page', 1, type=int)
-    pagination = Article.query.order_by(Article.pub_date.desc()).paginate(
+    pagination = Article.query.order_by(
+        Article.pub_date.desc()).paginate(
         page, per_page=current_app.config['FLASKY_BLOGS_PER_PAGE'],
         error_out=False)
     blogs = pagination.items
-    return render_template('main/index.html', blogs=blogs, pagination=pagination)
+    categorys = Category.query.all()
+    categorys_dict = {}
+    for i in categorys:
+        categorys_dict[i.id] = i.name
+    # print(categorys_dict)
+    return render_template('main/index.html', blogs=blogs,
+                           pagination=pagination, categorys_dict=categorys_dict)
 
 
 @main.route('/<int:id>', methods=['GET'])
@@ -39,7 +46,8 @@ def cms():
 @main.route('/new', methods=['GET'])
 @login_required
 def new():
-    return render_template('main/new.html')
+    categorys = Category.query.all()
+    return render_template('main/new.html', categorys=categorys)
 
 
 @main.route('/edit/<int:id>', methods=['GET'])

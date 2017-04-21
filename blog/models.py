@@ -62,10 +62,10 @@ class Article(db.Model):
 
     def to_json(self):
         c = Category.query.get_or_404(self.category_id).name
-        # oc = Category.query.filter(Category.name != c).all()
-        # other_category = [c]
-        # for i in oc:
-        #     other_category.append(i.name)
+        oc = Category.query.filter(Category.name != c).all()
+        other_category = []
+        for i in oc:
+            other_category.append(i.name)
         # print(other_category)
         u = User.query.get_or_404(self.author_id).name
         blog_json = {
@@ -79,6 +79,7 @@ class Article(db.Model):
             'time': self.pub_date,
             'user': u,
             'category': c,
+            'other_category': other_category,
             'img_url': url_for('static', filename='article_img/%s' % self.img)
         }
         return blog_json

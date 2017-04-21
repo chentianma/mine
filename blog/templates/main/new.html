@@ -28,14 +28,18 @@
             </div>
             <div class="uk-form-row">
                 <select id="cate" class="uk-form-controls">
-                    <option>Python</option>
-                    <option>JavaScript</option>
-                    <option>Life</option>
+                    {% if categorys %}
+                        {% for c in categorys %}
+                            <option>{{ c.name }}</option>
+                        {% endfor %}
+                    {% endif %}
                 </select>
             </div>
             <div class="uk-form-row">
                 <div class="uk-form-controls">
-                    <button type="button" class="uk-button uk-width-1-1 button_shadow uk-border-rounded" @click="submit_edit">提交</button>
+                    <button type="button" class="uk-button uk-width-1-1 button_shadow uk-border-rounded"
+                            @click="submit_edit">提交
+                    </button>
                 </div>
             </div>
         </form>
@@ -49,38 +53,38 @@
 {% endblock %}
 
 {% block scripts %}
-        <script>
-            vm = new Vue({
-                el: '#editor',
-                data: {
-                    blog: {
-                        'id': null,
-                        'url': null,
-                        'title': null,
-                        'text': '',
-                        'time': null,
-                        'user': null,
-                        'category': null
-                    },
-                    markhtml: ''
+    <script>
+        vm = new Vue({
+            el: '#editor',
+            data: {
+                blog: {
+                    'id': null,
+                    'url': null,
+                    'title': null,
+                    'text': '',
+                    'time': null,
+                    'user': null,
+                    'category': null
                 },
-                computed: {
-                    compiledMarkdown: function () {
-                        this.markhtml = marked(this.blog.text, {sanitize: true});
-                        return this.markhtml
-                    }
-                },
-                methods: {
-                    submit_edit: function () {
-                        this.blog.category = $("#cate option:selected").text();
-{#                        this.blog.text = $('.CodeMirror-code').text();#}
-                        this.blog.text = $('#editor_string').val();
-                        $.post('/api/blog/create', this.blog, function (data, status) {
-                            var blog_id = data.id;
-                            $(location).attr('href', '/blog/' + blog_id);
-                        });
-                    }
+                markhtml: ''
+            },
+            computed: {
+                compiledMarkdown: function () {
+                    this.markhtml = marked(this.blog.text, {sanitize: true});
+                    return this.markhtml
                 }
-            })
-        </script>
+            },
+            methods: {
+                submit_edit: function () {
+                    this.blog.category = $("#cate option:selected").text();
+                    this.blog.text = $('#editor_string').val();
+                    $.post('/api/blog/create', this.blog,
+                            function (data, status) {
+                                var blog_id = data.id;
+                                $(location).attr('href', '/blog/' + blog_id);
+                            });
+                }
+            }
+        })
+    </script>
 {% endblock %}
