@@ -31,9 +31,11 @@ def single_blog(id):
     return render_template('main/blog.html')
 
 
-@main.route('/category', methods=['GET'])
-def category():
-    return render_template('main/category.html')
+@main.route('/category/<int:id>/blogs', methods=['GET'])
+def category_blogs(id):
+    category = Category.query.filter_by(id=id).first_or_404()
+    blogs = Article.query.filter_by(category_id=id).all()
+    return render_template('main/category.html', blogs=blogs, category=category)
 
 
 @main.route('/cms', methods=['GET'])

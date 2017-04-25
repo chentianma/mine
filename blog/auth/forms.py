@@ -7,4 +7,4 @@ class LoginForm(Form):
     user_name = StringField('User', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Keep me logged in')
-    submit = SubmitField('Log In')
+    submit = SubmitField('登录')

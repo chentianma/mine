@@ -1,12 +1,43 @@
 {% extends 'base.html' %}
 
 {% block head %}
-{{ super() }}
+    {{ super() }}
 {% endblock %}
 
 {% block content %}
     <div>
-        <h1>Category page</h1>
+        <div class="uk-grid uk-grid-collapse">
+            <div class="uk-width-1-2">
+                <h2 class="uk-text-right">分类归档：</h2>
+            </div>
+            <div class="uk-width-1-2">
+                <h2 class="uk-text-left uk-text-warning">{{ category.name }}</h2>
+            </div>
+        </div>
+        <hr style="margin: 20px 10px 30px 10px">
+    {% if blogs %}
+        {% for blog in blogs %}
+            <div class="uk-grid uk-padding-bottom-remove">
+                <div class="uk-width-medium-1-1 art_list">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-4">
+                            <h4 class="uk-text-primary">
+                                {{ moment(blog.pub_date).format('YYYY年M月D日') }}
+                            </h4>
+                        </div>
+                        <div class="uk-width-medium-3-4">
+                            <a class="" href="{{ url_for('main.single_blog', id=blog.id) }}">
+                                <h3 class="uk-text-success">{{ blog.title }}</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="uk-text-muted uk-text-center">你暂时还没有发布过该分类的文章......</h2>
+    {% endif %}
     </div>
 {% endblock %}
 

@@ -8,7 +8,8 @@ from .forms import LoginForm
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
+
+    if request.method == 'POST':
         user = User.query.filter_by(name=form.user_name.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)

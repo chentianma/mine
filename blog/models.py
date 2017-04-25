@@ -80,7 +80,7 @@ class Article(db.Model):
             'user': u,
             'category': c,
             'other_category': other_category,
-            'img_url': url_for('static', filename='article_img/%s' % self.img)
+            'img_url': url_for('static', filename='article_img/%s' % self.img, _external=True)
         }
         return blog_json
 
@@ -103,7 +103,7 @@ class Category(db.Model):
                            id=self.id,
                            _external=True),
             'name': self.name,
-            'articles': url_for('api.get_category_blogs',
+            'articles': url_for('main.category_blogs',
                                 id=self.id,
                                 _external=True)
         }
