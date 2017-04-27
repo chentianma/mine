@@ -8,7 +8,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class DefaultConfig(object):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, 'ivoryblog.db')
+    SQLALCHEMY_DATABASE_URI = "mysql://root:123456@localhost:3306/mine"
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'YOU-WILL-NEVER-GET'
