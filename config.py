@@ -8,8 +8,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class DefaultConfig(object):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = "mysql://root:123456@localhost:3306/mine"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:654321@localhost:3306/test?charset=utf8"
     TESTING = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
     CSRF_ENABLED = True
     SECRET_KEY = 'YOU-WILL-NEVER-GET'
     FLASKY_BLOGS_PER_PAGE = 8
