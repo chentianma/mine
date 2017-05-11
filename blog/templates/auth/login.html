@@ -14,6 +14,9 @@
     <div class="uk-grid" id="login_form">
         <div id="login_form" class="uk-width-2-3 uk-container-center ">
             <div class="uk-grid uk-grid-collapse uk-border-rounded l_d_shadow " style="padding: 50px 15px">
+                <div class="uk-width-1-1 uk-container-center">
+                    <h2 class="uk-text-center">登 录</h2>
+                </div>
                 <div class="uk-width-4-5 uk-container-center uk-margin-top ">
                     {% if get_flashed_messages() %}
                         <div class="uk-alert uk-alert-danger uk-border-rounded" data-uk-alert>
@@ -25,18 +28,18 @@
                 <div class="uk-width-4-5 uk-container-center uk-margin-top">
                     <form class="uk-form" action="{{ url_for('auth.login') }}" method="POST">
                         <div class="uk-form-row">
-                            {{ login_form.user_name(class='uk-form-controls-large uk-width-1-1', placeholder='登录名') }}
+                            {{ login_form.user_name(class='uk-form-controls-large uk-width-1-1 uk-form-large', placeholder='登录名') }}
                         </div>
                         <div class="uk-form-row">
-                            {{ login_form.password(class='uk-form-controls uk-width-1-1 ', placeholder='密码') }}
+                            {{ login_form.password(class='uk-form-controls uk-width-1-1 uk-form-large', placeholder='密码') }}
                         </div>
                         <div class="uk-form-row">
-                            {{ login_form.user_name(type="checkbox", class='uk-form-controls', value='y') }}
-                            <label class="uk-text-muted uk-text-small">Remember Me</label>
+                            {{ login_form.user_name(type="checkbox", class='uk-form-controls') }}
+                            <label class="uk-text-muted uk-text-small">记住我</label>
                         </div>
 
                         <div class="uk-margin-top">
-                            {{ login_form.submit(class="uk-width-1-1 uk-button uk-button-primary uk-border-rounded button_shadow") }}
+                            {{ login_form.submit(class="uk-width-1-1 uk-button uk-button-primary uk-border-rounded button_shadow uk-text-contrast") }}
                         </div>
                     </form>
                 </div>
