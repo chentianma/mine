@@ -1,0 +1,19 @@
+.l_d_shadow {
+                /*box-shadow: -5px 5px 15px black;*/
+                /*background-color: #ffffff;*/
+                box-shadow: -1px 1px 10px black;
+            }
+
+.l_shadow {
+                /*box-shadow: -5px 5px 15px black;*/
+                box-shadow: -1px 0px 10px black;
+            }
+
+#content_page {
+                /*background-image:url(/static/img/11.jpeg);*/
+                margin: 25px;
+            }
+
+.button_shadow {
+                box-shadow: -1px 1px 10px black;
+            }

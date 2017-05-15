@@ -9,9 +9,9 @@
 {% block content %}
     {% if blogs %}
         {% if blogs[0] %}
-            <div class="uk-block-default uk-border-rounded l_d_shadow">
-                <div class="uk-grid uk-grid-small">
-                    <div class="uk-width-1-1 uk-border-rounded">
+            <div class="uk-block-default uk-border-rounded l_d_shadow uk-hidden-small">
+                <div class="uk-grid uk-grid-medium">
+                    <div class="uk-width-medium-1-1 uk-border-rounded">
                         <figure class="uk-overlay uk-overlay-hover">
                             <img class=" uk-overlay-scale"
                                  src="{{ url_for('static', filename='img/top_image.png') }}"
@@ -31,16 +31,14 @@
         {% endif %}
 
 
-        {% for blog in blogs %}
+        {% for blog in blogs[1:] %}
             <div class="uk-grid">
                 <div class="uk-width-medium-1-1 art_list">
-                    <div class=" uk-border-rounded l_d_shadow">
                         <div class="uk-grid" style="padding: 0 10px 10px 20px">
                             <div class="uk-width-medium-3-4 uk-panel uk-margin-top">
+                                <a href="{{ url_for('main.single_blog', id=blog.id) }}">
                                 <h3 class="uk-text-success">{{ blog.title }}</h3>
-{#                                <a class="uk-panel-title " href="{{ url_for('main.single_blog', id=blog.id) }}">#}
-{#                                    <h3 class="uk-text-success">{{ blog.title }}</h3>#}
-{#                                </a>#}
+                                    </a>
                                 <div class="uk-grid">
                                     <div class="uk-width-1-2">
                                         <h5 class="uk-text-small">
@@ -55,16 +53,13 @@
                                 </div>
                                 <p class="uk-text-muted">{{ blog.description }}</p>
                             </div>
-{#                            <div class="uk-width-medium-1-4" style="margin-top: 7%; background-image: url('{{ url_for('static', filename ='article_img/' + blog.img)}}')">#}
                             <div class="uk-width-medium-1-4" style="margin-top: 7%">
                                 <a href="{{ url_for('main.single_blog', id=blog.id) }}">
                                     <span>
                                         <h5 class=" uk-text-success uk-text-center">继续阅读...</h5>
                                     </span>
-
                                 </a>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
