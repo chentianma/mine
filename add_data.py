@@ -76,8 +76,8 @@ class Add(object):
 
     def add_user(self):
         admin_role = Role.query.filter_by(role='Admin').first()
-        user1 = User(name='Admin1', role=admin_role)
-        user1.password = '111111'
+        user1 = User(name='Admin', role=admin_role)
+        user1.password = '3322505'
         db.session.add(user1)
         db.session.commit()
         return

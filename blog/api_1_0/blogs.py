@@ -73,9 +73,8 @@ def create_blog():
                           text=text,
                           user=user,
                           category=cate)
-    new_id = Article.query.filter_by(title=title).first_or_404().id
-
     db.session.add(new_article)
     db.session.commit()
+    new_id = Article.query.filter_by(title=title).first_or_404().id
 
     return jsonify({'id': new_id})
