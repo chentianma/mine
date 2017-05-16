@@ -22,7 +22,7 @@ def create_app():
     from .api_1_0 import api as api_blueprint
     from .auth import auth as auth_blueprint
     app = Flask(__name__)
-    app.config.from_object(DefaultConfig())
+    app.config.from_object(Config())
 
     app.register_blueprint(blog_blueprint, url_prefix='/blog')
     app.register_blueprint(api_blueprint, url_prefix='/api')
