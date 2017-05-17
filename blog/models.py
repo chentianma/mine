@@ -68,7 +68,7 @@ class Article(db.Model):
             other_category.append(i.name)
         # print(other_category)
         # u = User.query.get_or_404(self.author_id).name
-        u = self.user.name
+        # u = self.user.name
         blog_json = {
             'id': self.id,
             'url': url_for('main.single_blog',
@@ -78,7 +78,7 @@ class Article(db.Model):
             'text': self.text,
             'description': self.description,
             'time': self.pub_date,
-            'user': u,
+            # 'user': u,
             'category': c,
             'other_category': other_category,
             'img_url': url_for('static', filename='article_img/%s' % self.img, _external=True)
