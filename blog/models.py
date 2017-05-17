@@ -67,7 +67,8 @@ class Article(db.Model):
         for i in oc:
             other_category.append(i.name)
         # print(other_category)
-        u = User.query.get_or_404(self.author_id).name
+        # u = User.query.get_or_404(self.author_id).name
+        u = self.user.name
         blog_json = {
             'id': self.id,
             'url': url_for('main.single_blog',
