@@ -14,7 +14,7 @@ login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 bootstrap = Bootstrap()
-csrf = CsrfProtect()
+# csrf = CsrfProtect()
 
 
 def create_app():
@@ -30,7 +30,7 @@ def create_app():
 
     login_manager.init_app(app)
     bootstrap.init_app(app)
-    csrf.init_app(app)
+    # csrf.init_app(app)
     db.app = app
     db.init_app(app)
     db.create_all()
