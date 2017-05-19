@@ -4,12 +4,6 @@
     {{ super() }}
 {% endblock %}
 
-{#{% block nav_li %}#}
-{#    <li><a href="{{ url_for('main.index') }}"><strong>目录</strong></a></li>#}
-{#    <li class="active"><a href="{{ url_for('main.cms') }}"><strong>管理</strong></a></li>#}
-{#    <li><a href="{{ url_for('main.about') }}"><strong>关于</strong></a></li>#}
-{#{% endblock %}#}
-
 {% block content %}
     <div class="uk-grid uk-grid-collapse">
         <div class="uk-width-large-2-3 uk-width-medium-1-1 uk-align-center">
@@ -54,29 +48,5 @@
 
 {% block scripts %}
     {{ super() }}
-    <script>
-        var vm = new Vue({
-            el: '#art',
-            data: {
-                blogs: []
-            },
-
-            methods: {
-                delete_blog: function (blog, index) {
-                    if (UIkit.modal.confirm('确认要删除“' + blog.title + '”？删除后不可恢复！',
-                                    function () {
-                                        $.get('/api/blog/' + blog.id + '/delete', initPage);
-                                    }));
-                }
-            }
-        });
-
-        function initPage() {
-            $.get('/api/blogs', function (data, status) {
-                vm.blogs = data.blogs;
-            })
-        }
-
-        initPage()
-    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/blog/cms.js') }}"></script>
 {% endblock %}

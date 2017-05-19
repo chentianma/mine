@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     {% block head %}
         <meta charset="UTF-8">
@@ -41,7 +41,7 @@
                  width=""
                  height="" alt="">
             <figcaption class="uk-overlay-panel uk-overlay-bottom uk-ignore">
-                <h1 class="uk-h1">Cold Sunset</h1>
+                <h1 class="uk-h1"><a href="{{ url_for('main.index') }}">Cold Sunset</a></h1>
                 <h3 class="uk-margin-top-remove">Personal blog for a new coder ...</h3>
             </figcaption>
         </figure>
@@ -128,25 +128,7 @@
     </div>
 </div>
 {% block scripts %}
-    <script>
-        var categoryVM = new Vue({
-                    el: '#categoryTemp',
-                    data: {
-                        categories: {}
-                    },
-                }
-        );
-
-        function getCategories() {
-            $.get('/api/categories',
-                    function (data, status) {
-                        categoryVM.categories = data.categories
-                    })
-        }
-        ;
-
-        getCategories()
-    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/blog/base.js') }}"></script>
 {% endblock %}
 
 </body>

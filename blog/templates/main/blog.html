@@ -49,31 +49,5 @@
 
 {% block scripts %}
     {{ super() }}
-    <script>
-        var art_vm = new Vue({
-            el: '#article',
-            data: {
-                blog: {},
-                markhtml: ''
-            },
-            computed: {
-                compiledMarkdown: function () {
-                    this.markhtml = marked(this.blog.text);
-                    return this.markhtml;
-
-                }
-            }
-        });
-
-        function initPage() {
-            var path = window.location.pathname;
-            $.get('/api' + path, function (data, status) {
-                art_vm.blog = data.blog;
-            });
-        }
-        ;
-
-        initPage();
-    </script>
-
+    <script type="text/javascript" src="{{ url_for('static', filename='js/blog/blog.js') }}"></script>
 {% endblock %}
