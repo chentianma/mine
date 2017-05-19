@@ -19,7 +19,7 @@
                                  height="" alt="">
                             <div class="uk-overlay-panel uk-overlay-slide-left">
                                 <p class="uk-text-large">{{ blogs[0].title }}</p>
-                                <p class="uk-h4"> {{ blogs[0].description }}</p>
+                                <p class="uk-h4"><strong>关键字：</strong>{% for d in blogs[0].parse_description() %}{{ d + '、' }}{% endfor %}</p>
                             </div>
                             <a class="uk-position-cover"
                                href="{{ url_for('main.single_blog', id=blogs[0].id) }} "></a>
@@ -51,7 +51,7 @@
                                         </h5>
                                     </div>
                                 </div>
-                                <p class="uk-text-muted">{{ blog.description }}</p>
+                                <p class="uk-text-muted"><strong>关键字：</strong>{% for d in blog.parse_description() %}{{ d + '、' }}{% endfor %}</p>
                             </div>
                             <div class="uk-width-medium-1-4" style="margin-top: 7%">
                                 <a href="{{ url_for('main.single_blog', id=blog.id) }}">

@@ -54,11 +54,15 @@ class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     img = db.Column(db.String(100), default='44.jpg')
     title = db.Column(db.String(100))
-    description = db.Column(db.String(90))
+    description = db.Column(db.String(150))
     text = db.Column(db.Text)
     pub_date = db.Column(db.DateTime, default=datetime.utcnow())
     author_id = db.Column(db.Integer, db.ForeignKey('User.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
+
+    def parse_description(self):
+        keys = [key for key in self.description.split(';')]
+        return keys
 
     def to_json(self):
         c = Category.query.get_or_404(self.category_id).name
@@ -77,6 +81,7 @@ class Article(db.Model):
             'title': self.title,
             'text': self.text,
             'description': self.description,
+            'descriptions': self.parse_description(),
             'time': self.pub_date,
             # 'user': u,
             'category': c,
