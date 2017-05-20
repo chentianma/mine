@@ -12,12 +12,12 @@
 
 {% block board %}
     <div class="uk-grid" id="login_form">
-        <div id="login_form" class="uk-width-medium-1-2 uk-container-center ">
-            <div class="uk-grid uk-grid-collapse uk-border-rounded l_d_shadow " style="padding: 25px  0">
+        <div id="login_form" class="uk-width-medium-1-2 uk-width-small-1-1 uk-container-center ">
+            <div class="uk-grid uk-grid-collapse uk-border-rounded l_d_shadow" style="padding: 20px 5px 30px">
                 <div class="uk-width-medium-1-1 uk-container-center">
                     <h2 class="uk-text-center">登 录</h2>
                 </div>
-                <div class="uk-width-medium-4-5 uk-container-center uk-margin-top ">
+                <div class="uk-width-medium-4-5 uk-container-center ">
                     {% if get_flashed_messages() %}
                         <div class="uk-alert uk-alert-danger uk-border-rounded" data-uk-alert>
                             <a href="" class="uk-alert-close uk-close"></a>
@@ -26,20 +26,20 @@
                         </div>
                     {% endif %}
                 <div class="uk-width-medium-4-5 uk-container-center uk-margin-top">
-                    <form class="uk-form" action="{{ url_for('auth.login') }}" method="POST">
+                    <form class="uk-form uk-width-1-1" action="{{ url_for('auth.login') }}" method="POST">
                         <div class="uk-form-row">
-                            {{ login_form.user_name(class='uk-form-controls-large uk-width-medium-1-1', placeholder='Username') }}
+                            {{ login_form.user_name(class='uk-form-controls uk-width-1-1', placeholder='Username') }}
                         </div>
                         <div class="uk-form-row">
-                            {{ login_form.password(class='uk-form-controls-large uk-width-medium-1-1', placeholder='Password') }}
+                            {{ login_form.password(class='uk-form-controls uk-width-1-1', placeholder='Password') }}
                         </div>
                         <div class="uk-form-row">
                             {{ login_form.user_name(type="checkbox", class='uk-form-controls') }}
                             <label class="uk-text-muted uk-text-small">记住我</label>
                         </div>
 
-                        <div class="uk-margin-top">
-                            {{ login_form.submit(class="uk-width-medium-1-1 uk-button uk-button-primary uk-border-rounded button_shadow uk-text-contrast") }}
+                        <div class="uk-margin-top uk-container-center">
+                            {{ login_form.submit(class="uk-width-1-1 uk-button uk-button-primary uk-border-rounded button_shadow uk-text-contrast") }}
                         </div>
                     </form>
                 </div>
