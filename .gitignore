@@ -17,6 +17,7 @@ MANIFEST
 secrets.cfg
 .mypy_cache/
 .idea/
+uploadFile/
 =======
 # Byte-compiled / optimized / DLL files
 __pycache__/

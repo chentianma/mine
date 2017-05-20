@@ -9,23 +9,23 @@
         {% endblock %}
         <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/uikit.min.css') }}"/>
         <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/components/sticky.css') }}"/>
-        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-        <script src="{{ url_for('static', filename='uikit/js/uikit.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
-        <script src="{{ url_for('static', filename='uikit/js/components/lightbox.js') }}"></script>
-        <script src="{{ url_for('static', filename='uikit/js/components/sticky.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='uikit/js/uikit.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/vue.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='uikit/js/components/lightbox.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='uikit/js/components/sticky.js') }}"></script>
 
 
         <!-- Codemirror 和 marked 依赖 -->
         <!-- 需要浏览器支持ES6标准，import的新特性，暂时未做其他标准的兼容 -->
         <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/lib/codemirror.css') }}">
-        <script src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
-        <script src="{{ url_for('static', filename='codemirror/mode/markdown/markdown.js') }}"></script>
-        <script src="{{ url_for('static', filename='codemirror/addon/mode/overlay.js') }}"></script>
-        <script src="{{ url_for('static', filename='codemirror/mode/xml/xml.js') }}"></script>
-        <script src="{{ url_for('static', filename='codemirror/mode/gfm/gfm.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/marked.js') }}"></script>
-        {{ moment.include_moment() }}
+        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/markdown/markdown.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/addon/mode/overlay.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/xml/xml.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/gfm/gfm.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/marked.js') }}"></script>
+        {{ moment.include_moment(local_js='/static/js/moment.min.js') }}
         {{ moment.lang("zh-CN") }}
 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
@@ -37,7 +37,7 @@
     <div class="uk-width-medium-3-5 uk-container-center l_d_shadow">
         <figure class="uk-overlay uk-overlay-hover">
             <img class=" uk-overlay-scale"
-                 src="{{ url_for('static', filename='img/top_image2.png') }}"
+                 src="{{ url_for('static', filename='img/top_image2-mini.png') }}"
                  width=""
                  height="" alt="">
             <figcaption class="uk-overlay-panel uk-overlay-bottom uk-ignore">

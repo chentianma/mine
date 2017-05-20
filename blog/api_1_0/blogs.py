@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 
 
+import os
 from flask import jsonify, redirect, request, url_for
 from . import api
 from blog import db
