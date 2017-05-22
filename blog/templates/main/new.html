@@ -3,16 +3,7 @@
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/components/htmleditor.css') }}"/>
-    <script src="{{ url_for('static', filename='uikit/js/components/htmleditor.js') }}"></script>
-    <!-- Codemirror 和 marked 依赖 -->
-        <!-- 需要浏览器支持ES6标准，import的新特性，暂时未做其他标准的兼容 -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/lib/codemirror.css') }}">
-        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/markdown/markdown.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/addon/mode/overlay.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/xml/xml.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/gfm/gfm.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/marked.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/lib/codemirror.css') }}">
 {% endblock %}
 
 {% block board %}
@@ -30,8 +21,7 @@
             </div>
             <div class="uk-form-row">
                 <div class="uk-form-controls">
-                    <textarea id="editor_string" cols="" rows="" placeholder=""
-                              data-uk-htmleditor="{ mode:'split', markdown:true}"></textarea>
+                    <textarea id="editor_string" cols="" rows="" placeholder="" data-uk-htmleditor="{ mode:'split', markdown:true}"></textarea>
                 </div>
             </div>
             <div class="uk-form-row">
@@ -61,5 +51,15 @@
 {% endblock %}
 
 {% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='uikit/js/components/htmleditor.js') }}"></script>
+    <!-- Codemirror 和 marked 依赖 -->
+    <!-- 需要浏览器支持ES6标准，import的新特性，暂时未做其他标准的兼容 -->
+    <script type="text/javascript" src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/markdown/markdown.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='codemirror/addon/mode/overlay.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/xml/xml.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/gfm/gfm.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/marked.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/blog/new.js') }}"></script>
 {% endblock %}

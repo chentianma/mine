@@ -17,4 +17,4 @@ function getCategories() {
         })
 };
 
-getCategories()
+$(document).ready(getCategories())

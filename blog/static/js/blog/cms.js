@@ -23,4 +23,4 @@
             })
         }
 
-        initPage()
+        $(document).ready(initPage())

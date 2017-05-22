@@ -2,7 +2,6 @@
 
 {% block head %}
     {{ super() }}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/marked.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -50,5 +49,6 @@
 
 {% block scripts %}
     {{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/marked.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/blog/blog.js') }}"></script>
 {% endblock %}

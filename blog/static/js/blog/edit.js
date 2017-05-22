@@ -37,17 +37,22 @@ var editor_vm = new Vue({
     }
 });
 
-// {#初始化codemirror编辑器#}
-var mytextarea = document.getElementById('editor_string');
-var htmleditor = UIkit.htmleditor(mytextarea, {mode: 'split', markdown: true});
-
-function initPage() {
+function initPage(htmleditor) {
     var path = window.location.pathname;
     $.get('/api' + path, function (data, status) {
         editor_vm.blog = data.blog;
         htmleditor.editor.setValue(editor_vm.blog.text);
     });
-}
-;
+};
 
-initPage();
+$(document).ready(function () {
+        // {#初始化codemirror编辑器#}
+    var mytextarea = document.getElementById('editor_string');
+    var htmleditor = UIkit.htmleditor(mytextarea, {mode: 'split', markdown: true});
+    initPage(htmleditor);
+});
+
+
+
+
+
