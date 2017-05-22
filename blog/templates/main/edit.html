@@ -8,123 +8,67 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/components/form-file.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='uikit/css/components/upload.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/lib/codemirror.css') }}">
-    {#    <script type="text/javascript" src="{{ url_for('static', filename='uikit/js/components/upload.js') }}"></script>#}
+
 {% endblock %}
 
 {% block board %}
     <div class="uk-grid uk-grid-collapse">
-{#        {% if get_flashed_messages() %}#}
-{#            <div class="uk-alert uk-alert-success uk-border-rounded" data-uk-alert>#}
-{#                <a href="" class="uk-alert-close uk-close"></a>#}
-{#                {{ get_flashed_messages()[0] }}#}
-{#            </div>#}
-{#            </div>#}
-{#        {% endif %}#}
-{#    <div class="uk-width-1-1 uk-placeholder uk-text-center uk-margin-bottom">#}
-{#        <form action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data">#}
-{#            <p><input type="file" name="file">#}
-{#                <input type="submit" value="Upload">#}
-{#        </form>#}
-{#    </div>#}
 
-    <form id="editor" class="uk-width-1-1 uk-form">
-        <div class="uk-form-row">
-            <div class="uk-form-controls">
-                <input v-model='blog.title' type="text" class="uk-width-1-1" placeholder="标题">
+        <form id="editor" class="uk-width-1-1 uk-form">
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <input v-model='blog.title' type="text" class="uk-width-1-1" placeholder="标题">
+                </div>
             </div>
-        </div>
-        <div class="uk-form-row">
-            <div class="uk-form-controls">
-                <input v-model='blog.description' type="text" class="uk-width-1-1"
-                       placeholder="关键字或描述语，关键字之间请用英文字符';'隔开">
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <input v-model='blog.description' type="text" class="uk-width-1-1"
+                           placeholder="关键字或描述语，关键字之间请用英文字符';'隔开">
+                </div>
             </div>
-        </div>
 
-        {#            文件上传#}
-        {#            <div class="uk-form-file uk-width-1-1 uk-margin-top">#}
-        {#                <div id="upload-drop" class="uk-placeholder uk-text-center">#}
-        {#                    <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i>#}
-        {#                    将文件拖拽到此 或<a class="uk-form-file uk-text-center">选择一个文件<input id="upload-select" type="file"></a>.#}
-        {#                </div>#}
-        {#                <div id="progressbar" class="uk-progress uk-hidden">#}
-        {#                    <div class="uk-progress-bar" style="width: 0%;">...</div>#}
-        {#                </div>#}
-        {#            </div>#}
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <textarea id="editor_string" cols="" rows="" placeholder=""></textarea>
+                </div>
+            </div>
+                <div class="uk-form-row uk-align-left uk-width-1-3">
+                    <select id="cate" class="uk-form-controls">
+                        <option v-text="blog.category"></option>
+                        <template v-for="c in blog.other_category">
+                            <option v-text="c"></option>
+                        </template>
+                    </select>
+                </div>
+                <div class="uk-align-right uk-margin-top"><a href="{{ url_for('main.upload') }}" target="_blank">上传文件</a></div>
 
-        <div class="uk-form-row">
-            <div class="uk-form-controls">
-                <textarea id="editor_string" cols="" rows="" placeholder=""></textarea>
-                {#                    <textarea id="editor_string" cols="" rows="" placeholder=""#}
-                {#                              data-uk-htmleditor="{markdown:true}"></textarea>#}
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button type="button" class="uk-button uk-width-1-1 button_shadow uk-border-rounded"
+                            @click="submit_edit">提交
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="uk-form-row">
-            <select id="cate" class="uk-form-controls">
-                <option v-text="blog.category"></option>
-                <template v-for="c in blog.other_category">
-                    <option v-text="c"></option>
-                </template>
-            </select>
-        </div>
-        <div class="uk-form-row">
-            <div class="uk-form-controls">
-                <button type="button" class="uk-button uk-width-1-1 button_shadow uk-border-rounded"
-                        @click="submit_edit">提交
-                </button>
-            </div>
-        </div>
-    </form>
+        </form>
     </div>
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='uikit/js/components/upload.min.js') }}"></script>
     <script src="{{ url_for('static', filename='uikit/js/components/htmleditor.min.js') }}"></script>
     <!-- Codemirror 和 marked 依赖 -->
     <!-- 需要浏览器支持ES6标准，import的新特性，暂时未做其他标准的兼容 -->
     <script type="text/javascript" src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/markdown/markdown.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='codemirror/mode/markdown/markdown.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='codemirror/addon/mode/overlay.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/xml/xml.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='codemirror/mode/gfm/gfm.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/marked.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/blog/edit.js') }}"></script>
-    <script>
-        {#            $(function(){#}
-        {##}
-        {#        var progressbar = $("#progressbar"),#}
-        {#            bar         = progressbar.find('.uk-progress-bar'),#}
-        {#            settings    = {#}
-        {##}
-        {#            action: '/api/upload', // 上传路径 url#}
-        {##}
-        {#            allow : '*.(jpg|jpeg|gif|png)', // 只允许上传图片#}
-        {##}
-        {#            loadstart: function() {#}
-        {#                bar.css("width", "0%").text("0%");#}
-        {#                progressbar.removeClass("uk-hidden");#}
-        {#            },#}
-        {##}
-        {#            progress: function(percent) {#}
-        {#                percent = Math.ceil(percent);#}
-        {#                bar.css("width", percent+"%").text(percent+"%");#}
-        {#            },#}
-        {##}
-        {#            allcomplete: function(response) {#}
-        {##}
-        {#                bar.css("width", "100%").text("100%");#}
-        {##}
-        {#                setTimeout(function(){#}
-        {#                    progressbar.addClass("uk-hidden");#}
-        {#                }, 250);#}
-        {##}
-        {#                alert("Upload Completed")#}
-        {#            }#}
-        {#        };#}
-        {##}
-        {#        var select = UIkit.uploadSelect($("#upload-select"), settings),#}
-        {#            drop   = UIkit.uploadDrop($("#upload-drop"), settings);#}
-        {#    });#}
-    </script>
 
+{% endblock %}
+
+{% block private_scripts %}
 {% endblock %}

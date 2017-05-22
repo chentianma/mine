@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        #content_height {
+            min-height: 500px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    {% if msg %}
+        <div class="uk-alert uk-width-4-5 uk-container-center uk-alert-danger uk-border-rounded" data-uk-alert>
+            <a href="" class="uk-alert-close uk-close"></a>
+            {{ msg }}
+        </div>
+    {% endif %}
+    <div class="uk-grid" id="content_height">
+
+        <div class="uk-width-1-1 uk-placeholder uk-text-center uk-margin-bottom">
+            <form action="{{ url_for('main.upload') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file"><input type="submit" value="Upload">
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}
