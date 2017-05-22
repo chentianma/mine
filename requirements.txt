@@ -12,6 +12,8 @@ Flask-SQLAlchemy==2.1
 Flask-SSLify==0.1.5
 Flask-Uploads==0.2.1
 Flask-WTF==0.12
+Flask-Compress==1.4.0
+
 gunicorn==19.4.5
 itsdangerous==0.24
 Jinja2==2.8

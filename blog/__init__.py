@@ -5,11 +5,13 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask_compress import Compress
 from config import *
 from flask_wtf.csrf import CsrfProtect
 
 
 db = SQLAlchemy()
+compress = Compress()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
@@ -30,6 +32,7 @@ def create_app(config='formal'):
 
     login_manager.init_app(app)
     bootstrap.init_app(app)
+    compress.init_app(app)
     # csrf.init_app(app)
     db.app = app
     db.init_app(app)
