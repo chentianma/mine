@@ -9,8 +9,8 @@ from blog import create_app, db
 from blog.models import User, Role, Article, Category
 
 
-# app = create_app()
-app = create_app(config='test')
+app = create_app()
+# app = create_app(config='test')
 moment = Moment(app)
 manager = Manager(app)
 migreate = Migrate(app, db)

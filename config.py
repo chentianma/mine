@@ -18,7 +18,7 @@ class TestConfig(object):
 
 class FormalConfig(object):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456@localhost:3306/mine?charset=utf8"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456@localhost:3306/test?charset=utf8"
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     CSRF_ENABLED = True
