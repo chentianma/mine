@@ -18,6 +18,13 @@
     box-shadow: -1px 1px 10px black;
 }
 
+.category_button {
+    padding:0 8px;
+    margin:0 0 10px 15px;
+    border: 1px solid lightgrey;
+    border-radius:25px;
+}
+
 /*#top {*/
 /*height: 200px;*/
 /*background: url('/static/img/top_image1.png') no-repeat center;*/

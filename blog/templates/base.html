@@ -60,7 +60,7 @@
                     {% block sidebar %}
                         <div class="uk-width-large-1-3 uk-visible-large">
                             <div class="uk-grid uk-grid-collapse " data-uk-sticky="{top:100}">
-                                <div class="uk-width-large-1-1 l_shadow  uk-border-rounded" style="opacity: 0.7"
+                                <div class="uk-width-large-1-1 uk-border-rounded button_shadow" style="opacity: 0.7"
                                      id="categoryTemp">
                                     <h3 class="uk-text-center uk-margin-top uk-text-large">文章分类
                                         {% if current_user.is_authenticated %}
@@ -71,11 +71,9 @@
                                     <hr>
                                     <div class="uk-grid uk-grid-collapse">
                                         <template v-model="categories" v-for="c in categories">
-                                            <div class="uk-width-1-2 ">
-                                                <a :href="c.articles"><p
-                                                        class="cate_text uk-text-warning uk-text-center uk-text-bold"
-                                                        v-text="c.name"></p></a>
-                                            </div>
+                                            <a :href="c.articles" class="category_button uk-container-center  uk-text-warning uk-animation-hover uk-animation-reverse uk-animation-scale">
+                                                <p class="uk-text-center uk-margin-bottom-remove" v-text="c.name"></p>
+                                            </a>
                                         </template>
                                     </div>
                                 </div>
