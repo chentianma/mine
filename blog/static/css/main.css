@@ -12,6 +12,7 @@
 #content_page {
     /*background-image:url(/static/img/11.jpeg);*/
     margin: 25px;
+    min-height: 500px;
 }
 
 .button_shadow {
