@@ -26,7 +26,7 @@ def create_app(config='formal'):
     app = Flask(__name__)
     app.config.from_object(configs[config])
 
-    app.register_blueprint(blog_blueprint)
+    app.register_blueprint(blog_blueprint, url_prefix='/blog')
     app.register_blueprint(api_blueprint, url_prefix='/api')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
