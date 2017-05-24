@@ -18,6 +18,7 @@ secrets.cfg
 .mypy_cache/
 .idea/
 uploadFile/
+migrations/
 =======
 # Byte-compiled / optimized / DLL files
 __pycache__/
