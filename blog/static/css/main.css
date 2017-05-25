@@ -1,3 +1,8 @@
+body {
+    background-color: rgba(252, 249, 247, 0.89);
+
+}
+
 .l_d_shadow {
     /*box-shadow: -5px 5px 15px black;*/
     /*background-color: #ffffff;*/
@@ -13,17 +18,27 @@
     /*background-image:url(/static/img/11.jpeg);*/
     margin: 25px;
     min-height: 500px;
+    /*opacity: 0.5;*/
+    /*filter: alpha(opacity=50);*/
+    /*-moz-opacity: 0.5;*/
+}
+
+#content_board {
 }
 
 .button_shadow {
     box-shadow: -1px 1px 10px black;
 }
 
+.edit_button_shadow {
+    box-shadow: 0 0 4px black;
+}
+
 .category_button {
-    padding:0 8px;
-    margin:0 5px 10px 15px;
+    padding: 0 8px;
+    margin: 0 5px 10px 15px;
     border: 1px solid lightgrey;
-    border-radius:25px;
+    border-radius: 25px;
 }
 
 /*#top {*/
