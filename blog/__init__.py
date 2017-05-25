@@ -23,10 +23,12 @@ def create_app(config='formal'):
     from .main import main as blog_blueprint
     from .api_1_0 import api as api_blueprint
     from .auth import auth as auth_blueprint
+    from .index import index as index_blueprint
     app = Flask(__name__)
     app.config.from_object(configs[config])
 
     app.register_blueprint(blog_blueprint, url_prefix='/blog')
+    app.register_blueprint(index_blueprint)
     app.register_blueprint(api_blueprint, url_prefix='/api')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
