@@ -4,6 +4,13 @@ body {
 
 }
 
+#board {
+    /*background-color: rgba(252, 249, 247, 0.89);*/
+    background-color: rgba(255, 255, 255, 0.96);
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 .l_d_shadow {
     /*box-shadow: -5px 5px 15px black;*/
     /*background-color: #ffffff;*/
