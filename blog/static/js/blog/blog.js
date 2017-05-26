@@ -8,11 +8,11 @@ var art_vm = new Vue({
         markhtml: ''
     },
     computed: {
-        compiledMarkdown: function () {
-            this.markhtml = marked(this.blog.text);
-            return this.markhtml;
-
-        }
+        // compiledMarkdown: function () {
+        //     this.markhtml = marked(this.blog.text);
+        //     return this.markhtml;
+        //
+        // }
     }
 });
 

@@ -16,15 +16,16 @@ vm = new Vue({
         markhtml: ''
     },
     computed: {
-        compiledMarkdown: function () {
-            this.markhtml = marked(this.blog.text, {sanitize: true});
-            return this.markhtml
-        }
+        // compiledMarkdown: function () {
+        //     this.markhtml = marked(this.blog.text, {sanitize: true});
+        //     return this.markhtml
+        // }
     },
     methods: {
         submit_edit: function () {
             this.blog.category = $("#cate option:selected").text();
             this.blog.text = $('#editor_string').val();
+            this.blog.html = $('.uk-htmleditor-preview').html();
             $.post('/api/blog/create', this.blog,
                 function (data, status) {
                     var blog_id = data.id;

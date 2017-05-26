@@ -10,6 +10,7 @@ var editor_vm = new Vue({
             'url': null,
             'title': null,
             'text': '',
+            'html': '',
             'time': null,
             'user': null,
             'new_category': null,
@@ -20,14 +21,15 @@ var editor_vm = new Vue({
         markhtml: ''
     },
     computed: {
-        compiledMarkdown: function () {
-            this.markhtml = marked(this.blog.text, {sanitize: true});
-            return this.markhtml
-        }
+    //     compiledMarkdown: function () {
+    //         this.markhtml = marked(this.blog.text, {sanitize: true});
+    //         return this.markhtml
+    //     }
     },
     methods: {
         submit_edit: function () {
             this.blog.text = $('#editor_string').val();
+            this.blog.html = $('.uk-htmleditor-preview').html();
             this.blog.category = $("#cate option:selected").text();
             $.post('/api/blog/' + this.blog.id + '/edit', this.blog, function (data, status) {
                 var blog_id = data.id;

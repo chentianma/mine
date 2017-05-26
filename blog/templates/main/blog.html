@@ -38,8 +38,8 @@
             </div>
         </div>
         <hr>
-        <div v-if="blog.text">
-            <div v-html="compiledMarkdown"></div>
+        <div v-if="blog.html">
+            <div v-html="blog.html"></div>
         </div>
     </div>
 {% endblock %}
