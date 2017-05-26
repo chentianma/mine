@@ -57,7 +57,7 @@ class Article(db.Model):
     description = db.Column(db.String(150))
     text = db.Column(db.Text)
     text_html = db.Column(db.Text)
-    pub_date = db.Column(db.DateTime, default=datetime.utcnow())
+    pub_date = db.Column(db.DateTime, default=datetime.now())
     click = db.Column(db.Integer, default=0)
     author_id = db.Column(db.Integer, db.ForeignKey('User.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
