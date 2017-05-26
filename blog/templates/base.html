@@ -19,7 +19,7 @@
     <div class="uk-width-medium-3-5 uk-container-center l_d_shadow">
         <figure class="uk-overlay uk-overlay-hover">
             <img class=" uk-overlay-scale"
-                 src="{{ url_for('static', filename='img/top_image2-mini.png') }}"
+                 src="{{ url_for('static', filename='img/top_image.jpg') }}"
                  width=""
                  height="" alt="">
             <figcaption class="uk-overlay-panel uk-overlay-bottom uk-ignore">
@@ -33,14 +33,14 @@
 
 
     <div id="board" class="uk-width-medium-3-5 uk-container-center l_d_shadow">
-        <nav class="uk-navbar" style="opacity: 0.8; padding: 6px; margin-bottom: 35px" data-uk-sticky>
+        <nav class="uk-navbar" style="opacity: 0.8; padding: 6px; margin-bottom: 25px" data-uk-sticky>
             <div class="uk-navbar-flip">
                 <ul class="uk-navbar-nav">
-                    <li><a href="{{ url_for('main.index') }}" class="uk-text-danger">Home</a></li>
+                    <li><a href="{{ url_for('main.index') }}" class="uk-text-danger">HOME</a></li>
                     {% if current_user.is_authenticated %}
                         <li><a href="{{ url_for('main.cms') }}" class="uk-text-danger">CMS</a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('main.about') }}" class="uk-text-danger">About</a></li>
+                    <li><a href="{{ url_for('main.about') }}" class="uk-text-danger">ABOUT</a></li>
                     {% if current_user.is_authenticated %}
                         <li><a href="{{ url_for('auth.logout') }}" class="uk-text-muted">LogOut</a></li>
                     {% else %}
@@ -112,7 +112,7 @@
 </div>
 {% block scripts %}
 
-    {{ moment.include_moment(local_js='/static/js/moment.min.js') }}
+    {{ moment.include_moment(local_js='/static/js/moment.js') }}
     {{ moment.lang("zh-CN") }}
     <script type="text/javascript" src="{{ url_for('static', filename='uikit/js/uikit.min.js') }}"></script>
     <script type="text/javascript"
