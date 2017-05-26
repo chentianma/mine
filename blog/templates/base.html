@@ -112,7 +112,7 @@
 </div>
 {% block scripts %}
 
-    {{ moment.include_moment(local_js='/static/js/moment.js') }}
+    {{ moment.include_moment(local_js='/static/js/moment.min.js') }}
     {{ moment.lang("zh-CN") }}
     <script type="text/javascript" src="{{ url_for('static', filename='uikit/js/uikit.min.js') }}"></script>
     <script type="text/javascript"
