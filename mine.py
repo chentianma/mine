@@ -6,7 +6,7 @@ from flask_script import Shell, Manager
 from flask_migrate import Migrate, MigrateCommand
 from flask_moment import Moment
 from blog import create_app, db
-from blog.models import User, Role, Article, Category
+from blog.models import User, Role, Article, Category, Topic
 
 
 app = create_app()

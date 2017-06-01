@@ -8,58 +8,67 @@
 
 {% block content %}
     {% if blogs %}
-{#        {% if blogs[0] %}#}
-            <div class="uk-block-default uk-border-rounded">
-                <div class="uk-grid uk-grid-medium">
-                    <div class="uk-width-medium-1-1 uk-hidden-small">
-                        <figure class="uk-overlay uk-overlay-hover">
-                            <img class=""
-                                 src="{{ url_for('static', filename='img/22.jpg') }}"
-                                 width=""
-                                 height="" alt="" style="opacity: 0.5; border: 1px solid darkgray; border-radius: 10px">
-{#                            <div class="uk-overlay-panel uk-overlay-slide-left">#}
-{#                                <p class="uk-text-large">{{ blogs[0].title }}</p>#}
-{#                                <p class="uk-h4"><strong>关键字：</strong>{% for d in blogs[0].parse_description() %}{{ d + '、' }}{% endfor %}</p>#}
-{#                            </div>#}
-{#                            <a class="uk-position-cover"#}
-{#                               href="{{ url_for('main.single_blog', id=blogs[0].id) }} "></a>#}
-                        </figure>
-                    </div>
+        {#        {% if blogs[0] %}#}
+        <div class="uk-block-default uk-border-rounded">
+            <div class="uk-grid uk-grid-medium">
+                <div class="uk-width-medium-1-1 uk-container-center uk-margin-bottom">
+                    {% if get_flashed_messages() %}
+                        <div class="uk-width-1-1 uk-alert uk-alert-danger uk-border-rounded" data-uk-alert>
+                            <a href="" class="uk-alert-close uk-close"></a>
+                            {{ get_flashed_messages()[0] }}</div>
+                    {% endif %}
                 </div>
+
+            <div class="uk-width-medium-1-1 uk-hidden-small">
+                <figure class="uk-overlay uk-overlay-hover">
+                    <img class=""
+                         src="{{ url_for('static', filename='img/22.jpg') }}"
+                         width=""
+                         height="" alt="" style="opacity: 0.5; border: 1px solid darkgray; border-radius: 10px">
+                    {#                            <div class="uk-overlay-panel uk-overlay-slide-left">#}
+                    {#                                <p class="uk-text-large">{{ blogs[0].title }}</p>#}
+                    {#                                <p class="uk-h4"><strong>关键字：</strong>{% for d in blogs[0].parse_description() %}{{ d + '、' }}{% endfor %}</p>#}
+                    {#                            </div>#}
+                    {#                            <a class="uk-position-cover"#}
+                    {#                               href="{{ url_for('main.single_blog', id=blogs[0].id) }} "></a>#}
+                </figure>
             </div>
-            <hr class="uk-hidden-small">
-{#        {% endif %}#}
+        </div>
+        </div>
+        <hr class="uk-hidden-small">
+        {#        {% endif %}#}
 
 
         {% for blog in blogs %}
             <div class="uk-grid">
                 <div class="uk-width-medium-1-1 art_list">
-                        <div class="uk-grid" style="padding: 0 10px 10px 20px">
-                            <div class="uk-width-medium-3-4 uk-panel uk-margin-top">
-                                <a href="{{ url_for('main.single_blog', id=blog.id) }}">
+                    <div class="uk-grid" style="padding: 0 10px 10px 20px">
+                        <div class="uk-width-medium-3-4 uk-panel uk-margin-top">
+                            <a href="{{ url_for('main.single_blog', id=blog.id) }}">
                                 <h3 class="uk-text-success">{{ blog.title }}</h3>
-                                    </a>
-                                <div class="uk-grid">
-                                    <div class="uk-width-1-2">
-                                        <h5 class="uk-text-small">
-                                            <span class="uk-text-bold uk-text-warning">发布时间：</span>{{ moment(blog.pub_date).fromNow(refresh=true) }}
-                                        </h5>
-                                    </div>
-                                    <div class="uk-width-1-2">
-                                        <h5 class="uk-text-small">
-                                            <span class="uk-text-bold uk-text-warning">文章分类：</span>{{ categorys_dict[blog.category_id] }}
-                                        </h5>
-                                    </div>
+                            </a>
+                            <div class="uk-grid">
+                                <div class="uk-width-1-2">
+                                    <h5 class="uk-text-small">
+                                        <span class="uk-text-bold uk-text-warning">发布时间：</span>{{ moment(blog.pub_date).fromNow(refresh=true) }}
+                                    </h5>
                                 </div>
-                                <p class="uk-text-muted"><strong>关键字：</strong>{% for d in blog.parse_description() %}{{ d + '、' }}{% endfor %}</p>
+                                <div class="uk-width-1-2">
+                                    <h5 class="uk-text-small">
+                                        <span class="uk-text-bold uk-text-warning">文章分类：</span>{{ categorys_dict[blog.category_id] }}
+                                    </h5>
+                                </div>
                             </div>
-                            <div class="uk-width-medium-1-4" style="margin-top: 7%">
-                                <a href="{{ url_for('main.single_blog', id=blog.id) }}">
+                            <p class="uk-text-muted"><strong>关键字：</strong>{% for d in blog.parse_description() %}
+                                {{ d + '、' }}{% endfor %}</p>
+                        </div>
+                        <div class="uk-width-medium-1-4" style="margin-top: 7%">
+                            <a href="{{ url_for('main.single_blog', id=blog.id) }}">
                                     <span>
                                         <h5 class=" uk-text-success uk-text-center">继续阅读...</h5>
                                     </span>
-                                </a>
-                            </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

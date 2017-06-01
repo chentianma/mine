@@ -5,20 +5,20 @@ import os
 from flask import jsonify, redirect, request, url_for
 from . import api
 from blog import db
-from ..models import User, Role, Article, Category
+from ..models import User, Role, Article, Category, Topic
 from flask_login import login_required
 import json
 
 
 @api.route('/blog/<int:id>')
 def get_blog(id):
-    blog = Article.query.filter_by(id=id).first()
+    blog = Article.query.filter_by(id=id, isDeleted=False).first()
     return jsonify({'blog': blog.to_json()})
 
 
 @api.route('/blogs', methods=['GET'])
 def get_blogs():
-    blogs = Article.query.order_by(Article.pub_date.desc()).all()
+    blogs = Article.query.filter_by(isDeleted=False).order_by(Article.pub_date.desc()).all()
     return jsonify({'blogs': [blog.to_json() for blog in blogs]})
 
 
@@ -26,7 +26,8 @@ def get_blogs():
 @login_required
 def delete_blog(id):
     blog = Article.query.filter_by(id=id).first()
-    db.session.delete(blog)
+    blog.isDeleted = True
+    db.session.add(blog)
     db.session.commit()
     return jsonify({'Result': 'success'})
 

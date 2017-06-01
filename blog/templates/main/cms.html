@@ -48,5 +48,10 @@
 
 {% block scripts %}
     {{ super() }}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/blog/cms.js') }}"></script>
+{% endblock %}
+{% block private_scripts %}
+    {{ super() }}
+   <script type="text/javascript" src="{{ url_for('static', filename='js/blog/cms.js') }}"></script>
+
+
 {% endblock %}

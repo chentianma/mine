@@ -4,6 +4,22 @@ body {
 
 }
 
+.uk-navbar {
+    background-color: rgba(255, 255, 255, 0.9);
+    /*opacity: 0.8;*/
+    padding: 6px;
+    margin-bottom: 25px
+}
+
+#topic_dropdown {
+    background-color: rgba(255, 255, 255, 0.9);
+    /*opacity: 1;*/
+}
+
+#topic_dropdown p {
+    margin-bottom: 0;
+}
+
 #board {
     /*background-color: rgba(252, 249, 247, 0.89);*/
     background-color: rgba(255, 255, 255, 0.96);
@@ -26,7 +42,7 @@ body {
 #content_page {
     /*background-image:url(/static/img/11.jpeg);*/
     margin: 25px;
-    min-height: 500px;
+    min-height: 800px;
     /*opacity: 0.5;*/
     /*filter: alpha(opacity=50);*/
     /*-moz-opacity: 0.5;*/
@@ -50,8 +66,29 @@ body {
     border-radius: 25px;
 }
 
-/*#top {*/
-/*height: 200px;*/
-/*background: url('/static/img/top_image1.png') no-repeat center;*/
-/*background-size: 100%;*/
-/*}*/
+#topic {
+    overflow-y: scroll;
+    max-height: 350px;
+}
+
+#topic .uk-accordion-title {
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid lightgrey;
+    border-radius: 25px;
+    height: 36px;
+    margin: 15px 0 10px 0;
+}
+
+.uk-accordion-title h4{
+    margin-top: 7px;
+}
+
+.uk-accordion-content {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.button_shadow_accordion h4{
+    box-shadow: -1px 1px 10px black;
+}

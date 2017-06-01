@@ -52,6 +52,7 @@ class Article(db.Model):
     __tablename__ = 'Article'
 
     id = db.Column(db.Integer, primary_key=True)
+    isDeleted = db.Column(db.Boolean, default=False)
     img = db.Column(db.String(100), default='44.jpg')
     title = db.Column(db.String(100))
     description = db.Column(db.String(150))
@@ -61,6 +62,8 @@ class Article(db.Model):
     click = db.Column(db.Integer, default=0)
     author_id = db.Column(db.Integer, db.ForeignKey('User.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
+    topic_id = db.Column(db.Integer, db.ForeignKey('Topic.id'), nullable=True)
+    topic_order = db.Column(db.Integer, nullable=True)
 
     def parse_description(self):
         keys = [key for key in self.description.split(';')]
@@ -102,9 +105,10 @@ class Category(db.Model):
     __tablename__ = 'Category'
 
     id = db.Column(db.Integer, primary_key=True)
+    isDeleted = db.Column(db.Boolean, default=False)
     name = db.Column(db.String(64))
-    articles = db.relationship('Article', backref='category',
-                               lazy='dynamic')
+    articles = db.relationship('Article', backref='category', lazy='dynamic')
+    topic = db.relationship('Topic', backref='category', lazy='dynamic')
 
     def to_json(self):
         cate_json = {
@@ -122,6 +126,42 @@ class Category(db.Model):
         return '<Category %r>' % self.name
 
 
+class Topic(db.Model):
+
+    __tablename__ = 'Topic'
+
+    id = db.Column(db.Integer, primary_key=True)
+    isDeleted = db.Column(db.Boolean, default=False)
+    pub_date = db.Column(db.DateTime, default=datetime.now())
+    title = db.Column(db.String(100), unique=True)
+    description = db.Column(db.Text)
+    article = db.relationship('Article', backref='topic', lazy='dynamic')
+    category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
+
+    def to_json(self):
+        topic_json = {
+            'title': self.title,
+            'pub_date': self.pub_date,
+            'description': self.description,
+            'description_short': str_truncate(self.description, length=80),
+            'articles_url': url_for('main.topic_blogs',
+                                    id=self.id,
+                                    _external=True)
+        }
+        return topic_json
+
+    def __repr__(self):
+        return '<Topic %r>' % self.title
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get_or_404(int(user_id))
+
+
+def str_truncate(str=None, length=150):
+    if len(str) > length:
+        new_str = str[:length] + '...'
+    else:
+        new_str = str
+    return new_str

@@ -38,5 +38,5 @@ def create_app(config='formal'):
     # csrf.init_app(app)
     db.app = app
     db.init_app(app)
-    db.create_all()
+    # db.create_all()
     return app
