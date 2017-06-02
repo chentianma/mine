@@ -11,7 +11,6 @@ import json
 
 
 @api.route('/topics')
-@login_required
 def get_topics():
     topics = Topic.query.filter_by(isDeleted=False).all()
     return jsonify({'topics': [topic.to_json() for topic in topics]})
