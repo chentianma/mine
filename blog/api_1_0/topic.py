@@ -18,7 +18,7 @@ def get_topics():
 
 @api.route('/topic/<int:id>/blogs', methods=['GET'])
 def get_topic_blogs(id):
-    blogs = Article.query.filter_by(isDeleted=False, topic_id=id).all()
+    blogs = Article.query.filter_by(isDeleted=False, isPublished=True, topic_id=id).all()
     return jsonify({'blogs': [blog.to_json() for blog in blogs]})
 
 

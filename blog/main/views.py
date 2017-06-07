@@ -11,7 +11,7 @@ from ..models import User, Role, Article, Category, Topic
 @main.route('/', methods=['GET'])
 def index():
     page = request.args.get('page', 1, type=int)
-    pagination = Article.query.filter_by(isDeleted=False).order_by(
+    pagination = Article.query.filter_by(isDeleted=False, isPublished=True).order_by(
         Article.pub_date.desc()).paginate(
         page, per_page=current_app.config['FLASKY_BLOGS_PER_PAGE'],
         error_out=False)
@@ -27,14 +27,14 @@ def index():
 
 @main.route('/<int:id>', methods=['GET'])
 def single_blog(id):
-    blog = Article.query.filter_by(isDeleted=False, id=id).first_or_404()
+    blog = Article.query.filter_by(isDeleted=False,isPublished=True, id=id).first_or_404()
     return render_template('main/blog.html')
 
 
 @main.route('/category/<int:id>/blogs', methods=['GET'])
 def category_blogs(id):
     category = Category.query.filter_by(isDeleted=False, id=id).first_or_404()
-    blogs = Article.query.filter_by(isDeleted=False, category_id=id).all()
+    blogs = Article.query.filter_by(isDeleted=False, isPublished=True, category_id=id).all()
     return render_template('main/category.html', blogs=blogs, category=category)
 
 
@@ -42,7 +42,7 @@ def category_blogs(id):
 def topic_blogs(id):
     topic = Topic.query.filter_by(isDeleted=False, id=id).first_or_404()
     category = Category.query.get(topic.category_id).name
-    blogs = Article.query.filter_by(isDeleted=False, topic_id=id).all()
+    blogs = Article.query.filter_by(isDeleted=False, isPublished=True, topic_id=id).all()
     return render_template('main/topic.html', blogs=blogs, topic=topic, category=category)
 
 

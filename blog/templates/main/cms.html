@@ -1,82 +1,107 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    {{ super() }}
+	{{ super() }}
 {% endblock %}
 
 {% block content %}
-    <ul class="uk-tab" data-uk-tab="{connect:'#article_cms'}">
-        <li class="uk-active"><a href="">文章管理</a></li>
-        <li><a href="">分类/专题</a></li>
-        <li><a href="">用户管理</a></li>
-        {#        <li class="uk-disabled"><a href="">...</a></li>#}
-    </ul>
+	<ul class="uk-tab" data-uk-tab="{connect:'#article_cms'}">
+		<li class="uk-active"><a href="">文章管理</a></li>
+		<li class=""><a href="">分类/专题</a></li>
+		<li><a href="">用户管理</a></li>
+		{#        <li class="uk-disabled"><a href="">...</a></li>#}
+	</ul>
 
-    <ul id="article_cms" class="uk-switcher uk-margin">
-        {# 文章管理页面 #}
-        <li>
-            <div class="uk-grid uk-grid-collapse">
-                <div class="uk-width-large-2-3 uk-width-medium-1-1 uk-align-center">
-                    <a href="{{ url_for('main.new') }}">
-                        <button class="uk-button uk-button-primary uk-width-1-1 uk-border-rounded button_shadow">
-                            新建文章
-                        </button>
-                    </a>
-                </div>
-            </div>
-            <hr>
-            <div class="uk-grid uk-grid-collapse">
-                <div class="uk-width-large-1-1">
-                    <div id="art">
-                        <div class="uk-table uk-table-hover uk-border-rounded">
-                            <table>
-                                <thead>
-                                <th>#</th>
-                                <th class="uk-width-4-6 uk-text-center">文章</th>
-                                <th class="uk-width-1-6 uk-text-center">编辑</th>
-                                <th class="uk-width-1-6 uk-text-center">删除</th>
-                                </thead>
+	<ul id="article_cms" class="uk-switcher uk-margin">
+		{# 文章管理页面 #}
+		<li>
+			<div class="uk-grid uk-grid-collapse">
+				<div class="uk-width-large-2-3 uk-width-medium-1-1 uk-align-center">
+					<a href="{{ url_for('main.new') }}">
+						<button class="uk-button uk-button-primary uk-width-1-1 uk-border-rounded button_shadow">
+							新建文章
+						</button>
+					</a>
+				</div>
+			</div>
+			<hr>
+			<div class="uk-grid uk-grid-collapse">
+				<div class="uk-width-large-1-1">
+					<div id="art">
+						<div class="uk-table uk-table-hover uk-border-rounded">
+							<table>
+								<thead>
+								<th>#</th>
+								<th class="uk-width-4-6 uk-text-center">文章</th>
+								<th class="uk-width-1-6 uk-text-center">编辑</th>
+								<th class="uk-width-1-6 uk-text-center">删除</th>
+								</thead>
 
-                                <template v-for="(blog, index) in blogs">
-                                    <tbody>
-                                    <th scope="row" v-text="index+1"></th>
-                                    <td class="uk-width-4-6 uk-text-center"><a :href="'/blog/'+blog.id"
-                                                                               v-text='blog.title'
-                                                                               class="uk-text-primary"></a></td>
-                                    <td class="uk-width-1-6 uk-text-center"><a :href="'/blog/edit/'+blog.id"><i
-                                            class="uk-icon-hover uk-icon-paint-brush"></i></a></td>
-                                    <td class="uk-width-1-6 uk-text-center"><a v-on:click="delete_blog(blog,index)"><i
-                                            class="uk-icon-hover uk-icon-times uk-icon-small"></i></a>
-                                    </td>
-                                    </tbody>
-                                </template>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-        {# 分类专题页面 #}
-        <li>
-            <div>
-                <h3> 分类专题页面 </h3>
-            </div>
-        </li>
-        {# 用户管理页面#}
-        <li>
-            <div>
-                <h3> 用户管理页面 </h3>
-            </div>
-        </li>
-    </ul>
+								<template v-for="(blog, index) in blogs">
+									<tbody>
+									<th scope="row" v-text="index+1"></th>
+									<td class="uk-width-4-6 uk-text-center"><a :href="'/blog/'+blog.id"
+									                                           v-text='blog.title'
+									                                           class="uk-text-primary"></a></td>
+									<td class="uk-width-1-6 uk-text-center"><a :href="'/blog/edit/'+blog.id"><i
+											class="uk-icon-hover uk-icon-paint-brush"></i></a></td>
+									<td class="uk-width-1-6 uk-text-center"><a v-on:click="delete_blog(blog,index)"><i
+											class="uk-icon-hover uk-icon-times uk-icon-small"></i></a>
+									</td>
+									</tbody>
+								</template>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+		{# 分类专题页面 #}
+		<li>
+			<div class="uk-grid uk-grid-collapse">
+				{% for i in range(5) %}
+					<div class="uk-width-1-1">
+						<div class="topic_name"><h3>Python Flask</h3></div>
+						<ul class="topic_blog_list">
+							<li class="uk-margin-bottom">
+								<div class="uk-grid uk-grid-collapse">
+									<input class="uk-width-1-10 uk-text-center" value="1" type="number">
+									<a href="#" class="uk-width-9-10 uk-text-center"><p>这是示例用的文章。。。。。。1</p></a>
+								</div>
+							</li>
+							<li class="uk-margin-bottom">
+								<div class="uk-grid uk-grid-collapse">
+									<input class="uk-width-1-10 uk-text-center" value="2" type="number">
+									<a href="#" class="uk-width-9-10 uk-text-center"><p>这是示例用的文章。。。。。。1</p></a>
+								</div>
+							</li>
+							<li class="uk-margin-bottom">
+								<div class="uk-grid uk-grid-collapse">
+									<input class="uk-width-1-10 uk-text-center" value="3" type="number">
+									<a href="#" class="uk-width-9-10 uk-text-center"><p>这是示例用的文章。。。。。。1</p></a>
+								</div>
+							</li>
+							<p class="uk-text-primary"><span class="uk-icon-plus-square-o"></span> 为专题添加文章...</p>
+						</ul>
+					</div>
+				{% endfor %}
+			</div>
+		</li>
+		{# 用户管理页面#}
+		<li>
+			<div>
+				<h3> 用户管理页面 </h3>
+			</div>
+		</li>
+	</ul>
 {% endblock %}
 
 {% block scripts %}
-    {{ super() }}
+	{{ super() }}
 {% endblock %}
 {% block private_scripts %}
-    {{ super() }}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/blog/cms.js') }}"></script>
+	{{ super() }}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/blog/cms.js') }}"></script>
 
 
 {% endblock %}
