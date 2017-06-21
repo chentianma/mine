@@ -52,7 +52,7 @@ class Article(db.Model):
     __tablename__ = 'Article'
 
     id = db.Column(db.Integer, primary_key=True)
-    isPublished = db.Column(db.Boolean, default=False)
+    isPublished = db.Column(db.Boolean, default=True)
     isDeleted = db.Column(db.Boolean, default=False)
     img = db.Column(db.String(100), default='44.jpg')
     title = db.Column(db.String(100))
