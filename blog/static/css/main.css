@@ -39,6 +39,12 @@ body {
     box-shadow: -1px 0px 10px black;
 }
 
+.border-display {
+    padding: 3px 0;
+    border: 1px solid lightgrey;
+    border-radius: 25px;
+}
+
 #content_page {
     /*background-image:url(/static/img/11.jpeg);*/
     margin: 25px;
@@ -52,7 +58,7 @@ body {
 }
 
 .button_shadow {
-    box-shadow: -1px 1px 10px black;
+    box-shadow: -1px 1px 7px black;
 }
 
 .edit_button_shadow {

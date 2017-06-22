@@ -66,7 +66,7 @@
                                 <div class="uk-width-large-1-1 uk-border-rounded uk-margin-bottom"
                                      style="opacity: 1"
                                      id="categoryTemp">
-                                    <h3 class="uk-text-center uk-margin-top uk-text-large">文章分类
+                                    <h3 class="uk-text-center uk-margin-top uk-text-large"><strong>文章分类</strong>
                                         {% if current_user.is_authenticated %}
                                             <a href="#setCategory" data-uk-modal><span
                                                     class="uk-icon-plus-square-o"></span></a>
@@ -76,15 +76,15 @@
                                     <div class="uk-grid uk-grid-collapse">
                                         <template v-model="categories" v-for="c in categories">
                                             <a :href="c.articles"
-                                               class="category_button uk-container-center uk-text-warning uk-animation-hover uk-animation-reverse uk-animation-scale">
-                                                <p class="uk-text-center uk-margin-bottom-remove" v-text="c.name"></p>
+                                               class="category_button uk-container-center uk-animation-hover uk-animation-reverse uk-animation-scale">
+                                                <p class="uk-text-center uk-margin-bottom-remove" style="color: black" v-text="c.name"></p>
                                             </a>
                                         </template>
                                     </div>
                                 </div>
 {#                                边栏专题模块#}
                                 <div class="uk-uk-width-large-1-1 uk-margin-top" id="topicTemp">
-                                    <h3 class="uk-text-center uk-text-large">专题
+                                    <h3 class="uk-text-center uk-text-large"><strong>专 题</strong>
                                         {% if current_user.is_authenticated %}
                                             <a href="#setTopic" data-uk-modal><span
                                                     class="uk-icon-plus-square-o"></span></a>
@@ -92,12 +92,12 @@
                                     </h3>
                                     <hr class="uk-margin-bottom-remove">
                                     <div id="topic" v-if="topics" v-model="topics"
-                                         class="uk-uk-width-large-1-1 uk-text-danger">
+                                         class="uk-uk-width-large-1-1">
                                         <div v-for="(t, index) in topics">
                                             <div class="uk-accordion-title" v-on:click="click_topic($event)">
                                                 <h4 class="" v-text="t.title"></h4>
                                             </div>
-                                            <div v-if="index==0" class="uk-accordion-content" style="display: block">
+                                            <div v-if="index==0" class="uk-accordion-content uk-text-danger" style="display: block">
                                                 <p v-text="t.description_short" class=""></p>
                                                 {#                                                <p v-text="t.description" class="uk-text-truncate"></p>#}
                                                 <a :href="t.articles_url" class="uk-text-center">进入专题...</a>

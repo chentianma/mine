@@ -45,17 +45,17 @@
                     <div class="uk-grid" style="padding: 0 10px 10px 20px">
                         <div class="uk-width-medium-3-4 uk-panel uk-margin-top">
                             <a href="{{ url_for('main.single_blog', id=blog.id) }}">
-                                <h3 class="uk-text-success">{{ blog.title }}</h3>
+                                <h3 class="">{{ blog.title }}</h3>
                             </a>
                             <div class="uk-grid">
                                 <div class="uk-width-1-2">
                                     <h5 class="uk-text-small">
-                                        <span class="uk-text-bold uk-text-warning">发布时间：</span>{{ moment(blog.pub_date).fromNow(refresh=true) }}
+                                        <span class="uk-text-bold uk-text-danger">发布时间：</span>{{ moment(blog.pub_date).fromNow(refresh=true) }}
                                     </h5>
                                 </div>
                                 <div class="uk-width-1-2">
                                     <h5 class="uk-text-small">
-                                        <span class="uk-text-bold uk-text-warning">文章分类：</span>{{ categorys_dict[blog.category_id] }}
+                                        <span class="uk-text-bold uk-text-danger">文章分类：</span>{{ categorys_dict[blog.category_id] }}
                                     </h5>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                         <div class="uk-width-medium-1-4" style="margin-top: 7%">
                             <a href="{{ url_for('main.single_blog', id=blog.id) }}">
                                     <span>
-                                        <h5 class=" uk-text-success uk-text-center">继续阅读...</h5>
+                                        <h5 class=" uk-text-danger uk-text-center">继续阅读...</h5>
                                     </span>
                             </a>
                         </div>
