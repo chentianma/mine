@@ -11,16 +11,16 @@
             {#                <h2 class="uk-text-right"></h2>#}
             {#            </div>#}
             <div class="uk-width-1-1 uk-margin-large-bottom">
-                <h1 class="uk-text-center uk-text-warning">{{ topic.title }}</h1>
+                <h1 class="uk-text-center uk-text-danger">{{ topic.title }}</h1>
             </div>
             <div class="uk-width-1-2">
-                <p class="uk-text-left uk-margin-left">专题分类：<em>{{ category }}</em></p>
+                <p class="uk-text-left uk-margin-left"><strong>专题分类：</strong><em>{{ category }}</em></p>
             </div>
             <div class="uk-width-1-2">
-                <p class="uk-text-center">创建日期：<em>{{ topic.pub_date }}</em></p>
+                <p class="uk-text-center"><strong>创建日期：</strong><em>{{ topic.pub_date }}</em></p>
             </div>
             <div class="uk-width-1-1 uk-margin-top">
-                <p class="uk-text-warning uk-margin-left"><strong class="uk-text-danger">简介：</strong>{{ topic.description }}</p>
+                <p class="uk-text-danger uk-margin-left"><strong class="" style="color: black">简介：</strong>{{ topic.description }}</p>
             </div>
         </div>
         {% if blogs %}
@@ -44,13 +44,13 @@
                     <div class="uk-width-medium-1-1 uk-margin-left">
                         <div class="uk-grid uk-grid-divider">
                             <div class="uk-width-medium-1-3 uk-text-center">
-                                <h4 class="uk-text-primary">
+                                <h4 class="uk-text-danger">
                                     {{ moment(blog.pub_date).format('YYYY-MM-DD HH:MM') }}
                                 </h4>
                             </div>
                             <div class="uk-width-medium-2-3 uk-text-center">
                                 <a class="" href="{{ url_for('main.single_blog', id=blog.id) }}">
-                                    <h4 class="uk-text-success">{{ blog.title }}</h4>
+                                    <h4 class="">{{ blog.title }}</h4>
                                 </a>
                             </div>
                         </div>
