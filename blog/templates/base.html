@@ -20,12 +20,12 @@
 </head>
 <body>
 <div class="uk-grid uk-grid-collapse">
-    <div class="uk-width-medium-3-5 uk-container-center l_d_shadow">
+    <div class="uk-width-medium-3-5 uk-container-center" style="max-width: 1000px;">
         <figure class="uk-overlay uk-overlay-hover">
             <img class=" uk-overlay-scale"
                  src="{{ url_for('static', filename='img/top_image.jpg') }}"
                  width=""
-                 height="" alt="">
+                 height="" alt="" style="border: 1px solid lightgrey;">
             <figcaption class="uk-overlay-panel uk-overlay-bottom uk-ignore">
                 <a href="{{ url_for('main.index') }}">
                     <img class="uk-width-2-5" src="{{ url_for('static', filename='img/logo.png') }}"></a>
@@ -35,8 +35,10 @@
     </div>
 
 
-    <div id="board" class="uk-width-medium-3-5 uk-container-center l_d_shadow">
+    <div id="board" class="uk-width-medium-3-5 uk-container-center ">
         <nav class="uk-navbar " style="" data-uk-sticky>
+            <a href="{{ url_for('main.index') }}">
+                    <img class="uk-border-circle" src="{{ url_for('static', filename='img/222.png') }}" style="max-height: 45px; border: 2px solid darkgray"></a>
             <div class="uk-navbar-flip">
                 <ul class="uk-navbar-nav">
                     <li><a href="{{ url_for('main.index') }}" class="uk-text-danger">HOME</a></li>
