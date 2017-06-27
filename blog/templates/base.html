@@ -38,18 +38,18 @@
     <div id="board" class="uk-width-medium-3-5 uk-container-center ">
         <nav class="uk-navbar " style="" data-uk-sticky>
             <a href="{{ url_for('main.index') }}">
-                    <img class="uk-border-circle" src="{{ url_for('static', filename='img/222.png') }}" style="max-height: 45px; border: 2px solid darkgray"></a>
+                    <img class="uk-border-circle uk-icon-spin" src="{{ url_for('static', filename='img/pic.jpg') }}" style="max-height: 40px; border: 2px solid darkgray"></a>
             <div class="uk-navbar-flip">
                 <ul class="uk-navbar-nav">
-                    <li><a href="{{ url_for('main.index') }}" class="uk-text-danger">HOME</a></li>
+                    <li><a href="{{ url_for('main.index') }}" class="uk-text-danger"><strong>首页</strong></a></li>
                     {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('main.cms') }}" class="uk-text-danger">CMS</a></li>
+                        <li><a href="{{ url_for('main.cms') }}" class="uk-text-danger"><strong>管理</strong></a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('main.about') }}" class="uk-text-danger">ABOUT</a></li>
+                    <li><a href="{{ url_for('main.about') }}" class="uk-text-danger"><strong>关于</strong></a></li>
                     {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('auth.logout') }}" class="uk-text-muted">LogOut</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}" class="uk-text-muted"><strong>退出</strong></a></li>
                     {% else %}
-                        <li><a href="{{ url_for('auth.login') }}" class="uk-text-muted">LogIn</a></li>
+                        <li><a href="{{ url_for('auth.login') }}" class="uk-text-muted"><strong>登录</strong></a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -104,7 +104,7 @@
                                                 {#                                                <p v-text="t.description" class="uk-text-truncate"></p>#}
                                                 <a :href="t.articles_url" class="uk-text-center">进入专题...</a>
                                             </div>
-                                            <div v-else class="uk-accordion-content" style="display: none">
+                                            <div v-else class="uk-accordion-content uk-text-danger" style="display: none">
                                                 <p v-text="t.description_short" class=""></p>
                                                 <a :href="t.articles_url" class="uk-text-center">进入专题...</a>
                                             </div>
@@ -179,7 +179,7 @@
 {% block scripts %}
     {{ moment.include_moment(local_js='/static/js/moment.min.js') }}
     {{ moment.lang("zh-CN") }}
-	<script type="text/javascript" color="0,0,255" opacity='0.6' zIndex="-2" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	<script type="text/javascript" color="0,0,255" opacity='0.6' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
 
     <script type="text/javascript"
             src="{{ url_for('static', filename='uikit/js/components/lightbox.min.js') }}"></script>

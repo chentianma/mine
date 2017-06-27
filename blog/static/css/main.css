@@ -13,6 +13,10 @@ body {
     margin-bottom: 25px
 }
 
+.uk-navbar-nav li :hover{
+    border-radius: 25px;
+}
+
 #topic_dropdown {
     background-color: rgba(255, 255, 255, 0.9);
     /*opacity: 1;*/
@@ -35,12 +39,11 @@ body {
     /*box-shadow: -5px 5px 15px black;*/
     /*background-color: #ffffff;*/
     box-shadow: -1px 1px 4px black;
-    /*max-width: 1000px;*/
 }
 
 .l_shadow {
     /*box-shadow: -5px 5px 15px black;*/
-    box-shadow: -1px 0px 10px black;
+    box-shadow: -1px 0 10px black;
 }
 
 .border-display {
