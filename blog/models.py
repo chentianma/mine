@@ -72,10 +72,25 @@ class Article(db.Model):
 
     def to_json(self):
         c = Category.query.get_or_404(self.category_id).name
+
         oc = Category.query.filter(Category.name != c).all()
+
         other_category = []
+        other_topic = []
         for i in oc:
             other_category.append(i.name)
+
+        if self.topic_id :
+            t = Topic.query.get_or_404(self.topic_id).title
+            ot = Topic.query.filter(Topic.title != t).all()
+            for k in ot:
+                other_topic.append(k.title)
+            other_topic.append('#取消关联#')
+        else:
+            t = None
+            ot = Topic.query.all()
+            for k in ot:
+                other_topic.append(k.title)
         # print(other_category)
         # u = User.query.get_or_404(self.author_id).name
         # u = self.user.name
@@ -93,6 +108,8 @@ class Article(db.Model):
             # 'user': u,
             'category': c,
             'other_category': other_category,
+            'topic': t,
+            'other_topic': other_topic,
             'img_url': url_for('static', filename='article_img/%s' % self.img, _external=True)
         }
         return blog_json
@@ -133,7 +150,7 @@ class Topic(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     isDeleted = db.Column(db.Boolean, default=False)
-    pub_date = db.Column(db.DateTime, default=datetime.now())
+    pub_date = db.Column(db.DateTime, default=datetime.utcnow())
     title = db.Column(db.String(100), unique=True)
     description = db.Column(db.Text)
     article = db.relationship('Article', backref='topic', lazy='dynamic')

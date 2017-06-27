@@ -59,7 +59,13 @@ def edit_blog(id):
     html = request.form.get('html')
     description = request.form.get('description')
     new_category = request.form.get('category')
+    new_topic = request.form.get('topic')
     new_c = Category.query.filter_by(name=new_category).first_or_404()
+    if new_topic == '#取消关联#':
+        new_t_id = None
+    else:
+        new_t = Topic.query.filter_by(title=new_topic).first_or_404()
+        new_t_id = new_t.id
 
     new_article = Article.query.filter_by(id=id).first()
     new_article.title = title
@@ -67,6 +73,7 @@ def edit_blog(id):
     new_article.text_html = html
     new_article.description = description
     new_article.category_id = new_c.id
+    new_article.topic_id = new_t_id
     new_id = id
 
     db.session.add(new_article)
@@ -82,6 +89,11 @@ def create_blog():
     html = request.form.get('html')
     des = request.form.get('description')
     category = request.form.get('category')
+    topic = request.form.get('topic')
+    if topic == '#取消关联#':
+        topic_model = None
+    else:
+        topic_model = Topic.query.filter_by(title=topic).first()
 
     user = User.query.filter_by(name='Admin1').first()
     cate = Category.query.filter_by(name=category).first()
@@ -90,7 +102,8 @@ def create_blog():
                           text=text,
                           text_html=html,
                           user=user,
-                          category=cate)
+                          category=cate,
+                          topic=topic_model)
     db.session.add(new_article)
     db.session.commit()
     new_id = Article.query.filter_by(title=title).first_or_404().id

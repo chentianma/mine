@@ -28,7 +28,7 @@ def index():
 @main.route('/<int:id>', methods=['GET'])
 def single_blog(id):
     blog = Article.query.filter_by(isDeleted=False,isPublished=True, id=id).first_or_404()
-    print(blog.to_json())
+    # print(blog.to_json())
     return render_template('main/blog.html')
 
 
@@ -43,7 +43,9 @@ def category_blogs(id):
 def topic_blogs(id):
     topic = Topic.query.filter_by(isDeleted=False, id=id).first_or_404()
     category = Category.query.get(topic.category_id).name
-    blogs = Article.query.filter_by(isDeleted=False, isPublished=True, topic_id=id).all()
+    blogs = Article.query.filter_by(isDeleted=False,
+                                    isPublished=True,
+                                    topic_id=id).order_by(Article.pub_date.desc()).all()
     return render_template('main/topic.html', blogs=blogs, topic=topic, category=category)
 
 
@@ -58,7 +60,8 @@ def cms():
 @login_required
 def new():
     categorys = Category.query.filter_by(isDeleted=False).all()
-    return render_template('main/new.html', categorys=categorys)
+    topics = Topic.query.filter_by(isDeleted=False).all()
+    return render_template('main/new.html', categorys=categorys, topics=topics)
 
 
 @main.route('/edit/<int:id>', methods=['GET'])

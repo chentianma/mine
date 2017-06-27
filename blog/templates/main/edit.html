@@ -40,6 +40,14 @@
                         </template>
                     </select>
                 </div>
+	        <div class="uk-form-row uk-align-left uk-width-1-3">
+                    <select id="topic_select" class="uk-form-controls">
+                        <option v-text="blog.topic"></option>
+                        <template v-for="c in blog.other_topic">
+                            <option v-text="c"></option>
+                        </template>
+                    </select>
+                </div>
                 <div class="uk-align-right uk-margin-top"><a href="{{ url_for('main.upload') }}" target="_blank">上传文件</a></div>
                 <div class="uk-align-right uk-margin-top"><a href="http://tool.oschina.net/highlight" target="_blank">高亮代码在线生成工具</a></div>
 

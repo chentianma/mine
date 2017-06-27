@@ -15,6 +15,8 @@ var editor_vm = new Vue({
             'user': null,
             'new_category': null,
             'category': null,
+            'new_topic': null,
+            'topic': null,
             'description': '',
             'img_url': null
         },
@@ -31,6 +33,7 @@ var editor_vm = new Vue({
             this.blog.text = $('#editor_string').val();
             this.blog.html = $('.uk-htmleditor-preview').html();
             this.blog.category = $("#cate option:selected").text();
+            this.blog.topic = $("#topic_select option:selected").text();
             $.post('/api/blog/' + this.blog.id + '/edit', this.blog, function (data, status) {
                 var blog_id = data.id;
                 $(location).attr('href', '/blog/' + blog_id);
