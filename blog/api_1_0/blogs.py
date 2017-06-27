@@ -63,6 +63,8 @@ def edit_blog(id):
     new_c = Category.query.filter_by(name=new_category).first_or_404()
     if new_topic == '#取消关联#':
         new_t_id = None
+    elif new_topic == '':
+        new_t_id = None
     else:
         new_t = Topic.query.filter_by(title=new_topic).first_or_404()
         new_t_id = new_t.id
