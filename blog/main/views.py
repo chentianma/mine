@@ -28,6 +28,7 @@ def index():
 @main.route('/<int:id>', methods=['GET'])
 def single_blog(id):
     blog = Article.query.filter_by(isDeleted=False,isPublished=True, id=id).first_or_404()
+    print(blog.to_json())
     return render_template('main/blog.html')
 
 
