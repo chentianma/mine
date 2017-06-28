@@ -34,7 +34,7 @@ def upload():
             filename2 = '%s_%s' % (datetime.utcnow().strftime("%Y%m%dT%H%M%SZ"), filename1)
             new_filename = os.path.join(save_path, filename2)
             file.save(new_filename)
-            msg = '文件上传成功！文件地址为 /uploadFile%s' % new_filename.split('/uploadFile')[1]
+            msg = '文件上传成功！文件地址为 /file/uploadFile%s' % new_filename.split('/uploadFile')[1]
             return render_template('main/upload.html', msg=msg)
     else:
         return render_template('main/upload.html')

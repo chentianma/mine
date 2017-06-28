@@ -73,7 +73,8 @@ class Article(db.Model):
     def to_json(self):
         c = Category.query.get_or_404(self.category_id).name
 
-        oc = Category.query.filter(Category.name != c).all()
+        oc = Category.query.filter(Category.name != c,
+                                   Category.isDeleted != True).all()
 
         other_category = []
         other_topic = []
@@ -82,7 +83,8 @@ class Article(db.Model):
 
         if self.topic_id :
             t = Topic.query.get_or_404(self.topic_id).title
-            ot = Topic.query.filter(Topic.title != t).all()
+            ot = Topic.query.filter(Topic.title != t,
+                                    Topic.isDeleted != True).all()
             for k in ot:
                 other_topic.append(k.title)
             other_topic.append('#取消关联#')

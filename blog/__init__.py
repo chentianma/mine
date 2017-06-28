@@ -24,6 +24,7 @@ def create_app(config='formal'):
     from .api_1_0 import api as api_blueprint
     from .auth import auth as auth_blueprint
     from .index import index as index_blueprint
+    from .file import file as file_blueprint
     app = Flask(__name__)
     app.config.from_object(configs[config])
 
@@ -31,6 +32,7 @@ def create_app(config='formal'):
     app.register_blueprint(index_blueprint)
     app.register_blueprint(api_blueprint, url_prefix='/api')
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    app.register_blueprint(file_blueprint, url_prefix='/file')
 
     login_manager.init_app(app)
     bootstrap.init_app(app)
