@@ -19,7 +19,7 @@ def get_blog(id):
 @api.route('/blogs', methods=['GET'])
 def get_blogs():
     blogs = Article.query.filter_by(isDeleted=False).order_by(Article.pub_date.desc()).all()
-    return jsonify({'blogs': [blog.to_json() for blog in blogs]})\
+    return jsonify({'blogs': [blog.to_json() for blog in blogs]})
 
 
 @api.route('/pub_blogs', methods=['GET'])
