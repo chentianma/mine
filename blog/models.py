@@ -67,8 +67,11 @@ class Article(db.Model):
     topic_order = db.Column(db.Integer, nullable=True)
 
     def parse_description(self):
-        keys = [key for key in self.description.split(';')]
-        return keys
+        if self.description:
+            keys = [key for key in self.description.split(';')]
+            return keys
+        else:
+            return None
 
     def to_json(self):
         c = Category.query.get_or_404(self.category_id).name

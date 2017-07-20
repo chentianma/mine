@@ -59,8 +59,11 @@
                                     </h5>
                                 </div>
                             </div>
-                            <p class="uk-text-muted"><strong>关键字：</strong>{% for d in blog.parse_description() %}
-                                {{ d + '、' }}{% endfor %}</p>
+                            <p class="uk-text-muted"><strong>关键字：
+                            {% if blog.parse_description() %}</strong>{% for d in blog.parse_description() %}
+                                {{ d + '、' }}{% endfor %}
+                            {% else %}<em>No keyword</em>
+                            {% endif %}</p>
                         </div>
                         <div class="uk-width-medium-1-4" style="margin-top: 7%">
                             <a href="{{ url_for('main.single_blog', id=blog.id) }}">
